@@ -5,7 +5,7 @@
   "author": "",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "babel src/ --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline --watch & live-server"
+    "start": "babel client/ --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline --watch & live-server"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
