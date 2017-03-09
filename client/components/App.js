@@ -1,5 +1,5 @@
 var App = () => (
-<div>App</div>
+<div>Grocery Store</div>
     
     
 
