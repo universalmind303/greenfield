@@ -1,0 +1,11 @@
+/* This file is only for testing ths server. It can be removed later. */
+
+html {
+  background-color: #FAFAFA;
+}
+
+body {
+  background-color: #FFF;
+  margin:0 auto;
+  max-width: 35em;
+}

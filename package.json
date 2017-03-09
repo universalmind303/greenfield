@@ -6,7 +6,9 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "babel client/ --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --open=./SpecRunner.html --watch & live-server",
-    "test": "jest"
+    "test": "jest",
+    "server": "node ./server/server.js"
+
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
@@ -21,6 +23,8 @@
   },
 
   "dependencies": {
+    "express": "^4.15.2",
+
     "chai": "^3.5.0",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
