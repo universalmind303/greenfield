@@ -1,46 +1,12 @@
-# React Boilerplate Instructions
+# Grocery List
 
-## Usage 
- `npm install`
- 'npm run start' will run your live-server.
- 'npm run build' will compile your jsx files into browser readable js files inside '/build'
-
-### Server 
-
-Start the server with:
-
-```
-npm run start
-```
-
-And see your app live at [localhost:8080](http://localhost:8080)
-
-### Do your magic 
-
-All your app files live in `app`.
-
-Organize these however you want. You always can use `import x from 'xyz'` to react `app/xyz.js(x)`.
-
-### Build 
-
-Bundle your apps with its dependencies using:
-
-```
-npm run build
-```
-
-You'll get an `index.html` and an `app.js` file inside `build`.
-
-
-# Grocery list 
-
-> Pithy project description
+Stay within budget while shopping.
 
 ## Team
 
-  - __Product Owner__: elijah Schow
+  - __Product Owner__: Elijah Schow
   - __Scrum Master__: Cory Grinstead
-  - __Development Team Members__: Burk, Johnathan.
+  - __Development Team Members__: Jonathan Granstaff, Burk McRae
 
 ## Table of Contents
 
@@ -48,40 +14,51 @@ You'll get an `index.html` and an `app.js` file inside `build`.
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
+    1. [Run Locally](#run-locally)
     1. [Tasks](#tasks)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
 ## Usage
 
-> Some usage instructions
+> TODO: add some usage instructions
 
 ## Requirements
 
 - Node 5.xx.x +
-- babel-cli
-- babel
-- reactjs
+- ReactJS
+- Webpack
+- (see `package.json` for details)
 
 ## Development
 
 ### Installing Dependencies
-Install Live Server from npm:
-```sh
-npm install -g live-server
-```
-To setup Babel-loader
+
 From within the root directory:
 
 ```sh
-npm install -g babel
-npm install -g babel-cli
 npm install
 ```
 
+### Run Locally
+
+1. Run the back-end:
+
+```sh
+npm start
+```
+
+1. Build the front-end:
+
+```sh
+npm run dev
+```
+
+1. Visit `http://localhost:8080` (or whichever port the server started on).
+
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/EliJoBurCo/greenfield/issues)
 
 
 ## Contributing
