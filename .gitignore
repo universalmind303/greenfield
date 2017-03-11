@@ -1,5 +1,5 @@
-node_modules/
-bower_components/
 *.log
-
-compiled/
+.DS_Store
+node_modules
+bower_components
+dist

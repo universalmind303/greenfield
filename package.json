@@ -2,31 +2,30 @@
   "name": "grocery-app",
   "version": "1.0.0",
   "description": "",
-  "author": "",
+  "author": "EliJoBurCo",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "babel client/ --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --open=./SpecRunner.html --watch & live-server",
-    "test": "jest",
-    "server": "node ./server/server.js"
+    "dev-react": "webpack -d --watch",
+    "start": "nodemon server/server.js"
   },
-  "devDependencies": {
-    "babel-cli": "^6.6.5",
-    "babel-jest": "^19.0.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-register": "^6.7.2",
-    "jest": "^19.0.2",
-    "live-server": "^1.0.0",
-    "react": "15.4.2",
-    "react-dom": "15.4.2"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/EliJoBurCo/greenfield.git"
   },
   "dependencies": {
-    "chai": "^3.5.0",
     "express": "^4.15.2",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
-    "mocha": "^3.2.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.4.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "webpack": "^2.2.1"
   }
 }
