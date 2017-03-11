@@ -5,3 +5,4 @@ const directory = process.env.PUBLIC || 'client/public';
 
 app.use('/', express.static(directory));
 app.listen(port, () => { console.log(`Listening on port ${port}. Serving '${directory}'.`) });
+module.exports = app;
