@@ -1,4 +1,6 @@
-class App extends React.Component { 
+import React from 'react'
+
+class App extends React.Component {
 	constructor(props){
 	  super(props)
 
@@ -92,6 +94,4 @@ class ListItem extends React.Component {
 	}
 }
 
-window.App = App;
-window.ListItem = ListItem;
-window.Header = Header;
+export default App
