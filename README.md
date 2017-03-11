@@ -46,17 +46,17 @@ npm install
 
 1. Run the back-end:
 
-```sh
-npm start
-```
+  ```sh
+  npm start
+  ```
 
-1. Build the front-end (in another tab):
+2. Build the front-end (in another tab):
 
-```sh
-npm run dev
-```
+  ```sh
+  npm run dev
+  ```
 
-1. Visit `http://localhost:8080` (or whichever port the server started on).
+3. Visit `http://localhost:8080` (or whichever port the server started on).
 
 ### Roadmap
 
