@@ -7,15 +7,15 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "dev": "webpack -d --watch",
-    "test": "mocha --bail --reporter list  server/tests/ServerSpec.test.js",
+    "test": "mocha --bail --reporter list  server/tests/ServerSpec.js",
     "react-test": "jest",
-    "build" : "webpack -p"
+    "build": "webpack -p"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/EliJoBurCo/greenfield.git"
   },
- "devDependencies": {
+  "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-jest": "^19.0.0",
     "babel-preset-es2015": "^6.22.0",
@@ -23,7 +23,11 @@
     "babel-register": "^6.7.2",
     "jest": "^19.0.2",
     "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "react-dom": "15.4.2",
+    "enzyme": "^2.2.0",
+    "jsdom": "^8.3.1",
+    "mocha": "^2.4.5",
+    "react-addons-test-utils": "^15.0.1"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
@@ -31,6 +35,7 @@
     "express": "^4.13.4",
     "express-partials": "^0.3.0",
     "express-session": "^1.15.1",
+    "jest": "^19.0.2",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
     "mocha": "^3.2.0",

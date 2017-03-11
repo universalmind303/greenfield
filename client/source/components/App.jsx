@@ -65,7 +65,7 @@ class Header extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="header">
 				<h1> Budget </h1>
 				<p>{"$" + this.props.budget}</p>
 				<h1> Total </h1>
