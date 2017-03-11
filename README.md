@@ -6,7 +6,9 @@ Stay within budget while shopping.
 
   - __Product Owner__: Elijah Schow
   - __Scrum Master__: Cory Grinstead
-  - __Development Team Members__: Jonathan Granstaff, Burk McRae
+  - __Development Team Members__:
+    - Burk McRae
+    - Jonathan Granstaff
 
 ## Table of Contents
 
