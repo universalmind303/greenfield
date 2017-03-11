@@ -6,8 +6,7 @@ const express = require('express');
 const fs = require('fs');
 const Promise = require('bluebird')
 Promise.promisifyAll(fs)
-baseUrl = 'http://127.0.0.1:8080'
-describe('Static File Server', () => {
+xdescribe('Static File Server', () => {
 
 
 
