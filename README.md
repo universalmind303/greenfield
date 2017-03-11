@@ -13,12 +13,12 @@ Stay within budget while shopping.
 ## Table of Contents
 
 1. [Usage](#Usage)
+1. [Team](#team)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Run Locally](#run-locally)
     1. [Tasks](#tasks)
-1. [Team](#team)
 1. [Contributing](#contributing)
 
 ## Usage
@@ -33,6 +33,10 @@ Stay within budget while shopping.
 - (see `package.json` for details)
 
 ## Development
+
+### Tasks
+
+View the [project roadmap](https://github.com/EliJoBurCo/greenfield/issues)
 
 ### Installing Dependencies
 
@@ -57,11 +61,6 @@ npm install
   ```
 
 3. Visit `http://localhost:8080` (or whichever port the server started on).
-
-### Roadmap
-
-View the project roadmap [here](https://github.com/EliJoBurCo/greenfield/issues)
-
 
 ## Contributing
 
