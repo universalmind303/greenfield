@@ -1,8 +1,5 @@
-var Test = (props) =>{
-  return (
+import React from 'react'
 
-  <div>hello </div>
-    )
-}
+var Test = (props) => <div>hello </div>;
 
-window.Test = Test;
+export default Test
