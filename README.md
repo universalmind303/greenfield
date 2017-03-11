@@ -50,7 +50,7 @@ npm install
 npm start
 ```
 
-1. Build the front-end:
+1. Build the front-end (in another tab):
 
 ```sh
 npm run dev
