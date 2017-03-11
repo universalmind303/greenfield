@@ -14,13 +14,13 @@ class App extends React.Component {
 
 	handleSubmit(event) {
 		this.addListItem(event.target.name.value, event.target.price.value);
-		this.updateBudget(eval(event.target.price.value));
+		this.updateTotal(eval(event.target.price.value));
 		event.target.name.value = '';
 		event.target.price.value = '';
 		event.preventDefault();
 	}
 
-	updateBudget(numb) {
+	updateTotal(numb) {
 		var newTotal = this.state.total + numb;
 		this.setState({total: newTotal})
 	}
@@ -47,8 +47,9 @@ class App extends React.Component {
 
       <div>
       	<Header budget={this.state.budget} total={this.state.total}/>
-      	<ListItem list={this.state.list} updateBudget={this.updateBudget}/>
-      	<form onSubmit={this.handleSubmit}>
+      	<ListItem list={this.state.list} updateTotal={this.updateTotal}/>
+
+				<form onSubmit={this.handleSubmit}>
       		<input type='text' name='name' placeholder='item' />
       		<input type='text' name='price' placeholder='price' />
       		<input type='submit' value='submit' />
@@ -57,6 +58,46 @@ class App extends React.Component {
     )
   }
 };
+
+class InlineEdit extends React.Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			editing: false
+		}
+
+		this.focus = this.focus.bind(this);
+	}
+
+	focus() {
+		this.textInput.focus();
+	}
+
+	editElement() {
+		this.setState({editing: true}, function() {
+			focus()
+		})
+	}
+
+	renderElement() {
+		if(this.state.editing) {
+			return(
+				//html stuff
+			)
+		} else {
+			return(
+				//html onClick stuff
+			)
+		}
+	}
+
+	render() {
+		return (
+			ref={input => this.textInput = input}
+		)
+	}
+}
 
 class Header extends React.Component {
 	constructor(props){
@@ -68,6 +109,7 @@ class Header extends React.Component {
 			<div className="header">
 				<h1> Budget </h1>
 				<p>{"$" + this.props.budget}</p>
+
 				<h1> Total </h1>
 				<p>{"$" + this.props.total}</p>
 			</div>
@@ -80,7 +122,7 @@ class ListItem extends React.Component {
 	  super(props)
 	}
 
-	// this.state.updateBudget()
+	// this.state.updateTotal()
 
 
 	render() {
