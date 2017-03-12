@@ -27,21 +27,26 @@ export default class App extends React.Component {
 	}
 
 	updateTotal(numb) {
-		var newTotal = this.state.total + numb;
-		this.setState({total: newTotal})
+		if(!isNaN(numb)){
+			var newTotal = this.state.total + numb;
+			this.setState({total: newTotal})
+		}
 	}
 
 	updateBudget(numb) {
-		this.setState({budget: numb})
-	}
+		if(!isNaN(numb)){
+			this.setState({budget: numb})
+		}}
 
 	addListItem(name, price) {
-		var arr = this.state.list.slice();
-		arr.push({
-			name: name,
-			price: price
-		})
-		this.setState({list: arr});
+		if(!isNaN(price) && typeof name === 'string'){
+			var arr = this.state.list.slice();
+			arr.push({
+				name: name,
+				price: price
+			})
+			this.setState({list: arr});
+		}
 	}
 
   render() {

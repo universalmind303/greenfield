@@ -25,50 +25,80 @@ describe('File structure', ()=>{
   });
 })
 
-xdescribe('App', function() {
+describe('App', function() {
   var app;
-  const renderer = TestUtils.createRenderer();
 
-  beforeEach(function() {
-    renderer.render(<App />);
-    app= render(<App />);  
-  })
-
-
-  it('should be a stateful class component', ()=> {
+  it('should be a stateful class component', function() {
     expect(React.Component.isPrototypeOf(App)).to.be.true;
   });
+  
   it('App should render a div',()=> {
-  let result = renderer.getRenderOutput();
-  expect(result.type).to.equal('div');
+    app =shallow(<App />);  
+    expect(app.node.type).to.equal('div');
+    app.unmount()
   })
 
-  it('should set budget and total', ()=> {
-    app = mount(<App />)
-    expect(app.find('.app').text()).to.equal(' Budget $ 0 Total $ 0')
-    app.node.setState({budget: 100, total: 80})
-    expect(app.find('.app').text()).to.equal(' Budget $ 100 Total $ 80')
-    app.unmount()
-  });
-  it('Components should have a div class',()=>{
+  it('Components should have a div class',function(){
     app = render(<App />)  
     expect(app.find(".app").attr()).to.deep.equal({class: 'app'})
     expect(app.find(".header").attr()).to.deep.equal({class: 'header'})
-    expect(app.find(".listItem").attr()).to.deep.equal({class: 'listItem'})
+    expect(app.find(".listItems").attr()).to.deep.equal({class: 'listItems'})
   });
 
-
-  xit('should submit form on click', ()=> {
-    // var spy = sinon.spy(app.node.handleSubmit, null);
-
-    //stll need to figure out how to implement this one. 
+  it('should increase total, and reset budget', function(){
     app = mount(<App />)
+    expect(app.find('.app').text()).to.equal(' Budget $ 0 Total $ 0')
+    app.node.setState({budget: 10, total: 10})
+    app.node.updateBudget(10)
+    app.node.updateTotal(10)
+    expect(app.find('.app').text()).to.equal(' Budget $ 10 Total $ 20')
+    app.unmount()
+  });
+  it('should only accept numbers as price inputs', function(){
 
-    // console.log(app.find('input').node)
-    // console.log(app.find('.submit').html())
-    app.find('.submit').simulate('submit')
-    sinon.assert.calledOnce(spy);
-    app.unmount();
+      //it should handle truthy/falsy inputs, i fixed it to ignore all except truthy/falsy
+    app = mount(<App />)
+    var num = 11
+    app.node.updateBudget(num)
+    app.node.updateBudget('an invalid input')
+    app.node.updateBudget({})
+    app.node.updateBudget({fake: 'data'})
+    app.node.updateBudget(['more bad data', num])
+    // app.node.updateBudget(true)
+    // app.node.updateBudget(false)
+    // app.node.updateBudget(undefined)
+    expect(app.node.state['budget']).to.equal(num)
+
+    app.node.updateTotal(num)
+    app.node.updateTotal('an invalid input')
+    app.node.updateTotal({})
+    app.node.updateTotal({fake: 'data'})
+    app.node.updateTotal(['more bad data', num])
+    // app.node.updateTotal(true)
+    // app.node.updateTotal(false)
+    // app.node.updateTotal(undefined)
+    expect(app.node.state['total']).to.equal(num)
+    app.unmount()
+  });
+  it('should handle invalid inputs', function(){
+    app = mount(<App/>)
+    app.node.addListItem('strawberry',10)
+    app.node.addListItem({}, {})
+    app.node.addListItem(1, 'strawberry')
+    app.node.addListItem(null, null)
+    expect(app.node.state['list'].length).to.equal(1)
+    app.unmount()
+
+  })
+  it('should be able to add list items', function(){
+    app = mount(<App/>)
+    app.node.addListItem('strawberry',10)
+    expect(app.node.state['list'].length).to.equal(1)
+    app.unmount()
+
+  })
+
+  xit('should submit form on click', function() {
   });
 });
 
@@ -76,40 +106,31 @@ xdescribe('App', function() {
 xdescribe('List', ()=>{
   var app;
   var list;
-  xit('should handle invalid price inputs', () => {
-    app = mount(<App />)
-    var num = 11
-    app.node.updateBudget(num)
-    app.node.updateBudget('an invalid input')
-    expect(app.node.state['total']).to.equal(num)
+  it('should render list items', ()=>  {
+    list = shallow(<ListItem list={[{name: 'apple', price: 2},{name: 'orange', price: 3}]}/>)
+    expect(list.node.type).to.equal('div')
+    expect(list.find('.listItems').children().length).to.equal(2)
+    expect(list.find('.listItems').html()).to.exist
+    list.unmount()
+  });
 
-  })
+
 
   it("should handle 2 of the same inputs", ()=> {
     // not 100% on how you should handle this one, but it definitly needs to handle 2 of the same items.
-  app = mount(<App />)
-  con
-  app.node.addListItem('apple', 2.00)
-  app.node.addListItem('apple', 2.00)
-  //either add another list item
-  expect(app.node.state['list'].length).to.equal(2)  
-  //or increase the total for the item. 
-  expect(app.node.state['list'].price).to.equal(4)
-  app.unmount()
+  list = shallow(<ListItem list={[{name: 'apple', price: 2}, {name: 'apple', price: 2}]}/>)
+
+
+  // i suggest increasing the prices
+  expect(list.find('.listItems').find('listItem').text()).to.equal('apple: $4')
+  expect(list.find('.listItems').children().length).to.equal(1)
+  list.unmount()
   });
 
 
-  xit('should render list items', ()=> {
-    //this test needs to be refactored once updateinfo works properly.
-    list = mount(<ListItem list={[{name: 'apple', price: 2},{name: 'orange', price: 3}]}/>)
-    expect(list.find('.listItem').html()).to.equal(
-     '<div class="listItem"><h2>apple: $2</h2><h2>orange: $3</h2></div>'
-    )
-    list.unmount()
-  });
 })
 
-describe("Budget Header", ()=> {
+xdescribe("Budget", ()=> {
   var header;
   var app;
 
@@ -123,18 +144,6 @@ describe("Budget Header", ()=> {
   })
 
   it('should only accept numbers as input', () =>{
-    app.node.updateBudget(222)
-    expect(app.node.state['budget']).to.equal(222)
-    app.node.updateBudget('abcd')
-    expect(app.node.state['budget']).to.equal(222)
-    app.node.updateBudget(nonexistentvariable)
-    expect(app.node.state['budget']).to.equal(222)
-    app.node.updateBudget({fake: 'data'})
-    expect(app.node.state['budget']).to.equal(222)
-
-
-
-
   })
 })
 
