@@ -2,7 +2,7 @@ import React from 'react'
 import App from './App.jsx'
 import InlineEdit from './InlineEdit.jsx'
 
-
+// does this one need to be stateful??? it seems like app.jsx is doing all the state management.
 export default class Header extends React.Component {
   constructor(props){
     super(props)

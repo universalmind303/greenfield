@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import { expect, should } from 'chai';
+import { expect, should, assert } from 'chai';
 import { mount, shallow, render } from 'enzyme';
 import TestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
 import sinon from 'sinon'
-
 
 import App  from '../source/components/App.jsx';
 import Header from '../source/components/Header.jsx';
@@ -26,7 +25,7 @@ describe('File structure', ()=>{
   });
 })
 
-describe('App', function() {
+xdescribe('App', function() {
   var app;
   const renderer = TestUtils.createRenderer();
 
@@ -74,7 +73,7 @@ describe('App', function() {
 });
 
 
-describe('List', ()=>{
+xdescribe('List', ()=>{
   var app;
   var list;
   xit('should handle invalid price inputs', () => {
@@ -89,9 +88,9 @@ describe('List', ()=>{
   it("should handle 2 of the same inputs", ()=> {
     // not 100% on how you should handle this one, but it definitly needs to handle 2 of the same items.
   app = mount(<App />)
+  con
   app.node.addListItem('apple', 2.00)
   app.node.addListItem('apple', 2.00)
-
   //either add another list item
   expect(app.node.state['list'].length).to.equal(2)  
   //or increase the total for the item. 
@@ -100,7 +99,8 @@ describe('List', ()=>{
   });
 
 
-  it('should render list items', ()=> {
+  xit('should render list items', ()=> {
+    //this test needs to be refactored once updateinfo works properly.
     list = mount(<ListItem list={[{name: 'apple', price: 2},{name: 'orange', price: 3}]}/>)
     expect(list.find('.listItem').html()).to.equal(
      '<div class="listItem"><h2>apple: $2</h2><h2>orange: $3</h2></div>'
@@ -109,17 +109,32 @@ describe('List', ()=>{
   });
 })
 
-xdescribe("Budget Header", ()=> {
+describe("Budget Header", ()=> {
   var header;
+  var app;
 
   beforeEach(() =>{
     header = mount(<Header />)
+    app = mount(<App />)
   })
   afterEach(() => {
     header.unmount()
+    app.unmount()
   })
 
   it('should only accept numbers as input', () =>{
+    app.node.updateBudget(222)
+    expect(app.node.state['budget']).to.equal(222)
+    app.node.updateBudget('abcd')
+    expect(app.node.state['budget']).to.equal(222)
+    app.node.updateBudget(nonexistentvariable)
+    expect(app.node.state['budget']).to.equal(222)
+    app.node.updateBudget({fake: 'data'})
+    expect(app.node.state['budget']).to.equal(222)
+
+
+
+
   })
 })
 
