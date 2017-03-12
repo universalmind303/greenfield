@@ -29,9 +29,8 @@ describe('App', function() {
   const renderer = TestUtils.createRenderer();
 
   beforeEach(function() {
-
-  renderer.render(<App />);
-    app = render(<App />)  
+    renderer.render(<App />);
+    app= render(<App />);  
   })
 
   it('App should render a div',()=> {
