@@ -24,10 +24,6 @@ describe('File structure', ()=>{
   it('InlineEdit should be contained in its own file', ()=> {
     expect(InlineEdit).to.be.a.function
   });
-
-
-
-
 })
 
 describe('App', function() {
@@ -50,9 +46,9 @@ describe('App', function() {
 
   it('should set budget and total', ()=> {
     app = mount(<App />)
-    expect(app.find('.app').text()).to.equal(' Budget $0 Total $0')
+    expect(app.find('.app').text()).to.equal(' Budget $ 0 Total $ 0')
     app.node.setState({budget: 100, total: 80})
-    expect(app.find('.app').text()).to.equal(' Budget $100 Total $80')
+    expect(app.find('.app').text()).to.equal(' Budget $ 100 Total $ 80')
     app.unmount()
   });
   it('Components should have a div class',()=>{
@@ -63,11 +59,12 @@ describe('App', function() {
   });
 
 
-  it('should submit form on click', ()=> {
+  xit('should submit form on click', ()=> {
+    // var spy = sinon.spy(app.node.handleSubmit, null);
+
     //stll need to figure out how to implement this one. 
     app = mount(<App />)
 
-    let spy = sinon.spy(app.node.handleSubmit())
     // console.log(app.find('input').node)
     // console.log(app.find('.submit').html())
     app.find('.submit').simulate('submit')
@@ -104,13 +101,26 @@ describe('List', ()=>{
 
 
   it('should render list items', ()=> {
-    list = shallow(<ListItem list={[{name: 'apple', price: 2},{name: 'orange', price: 3}]}/>)
+    list = mount(<ListItem list={[{name: 'apple', price: 2},{name: 'orange', price: 3}]}/>)
     expect(list.find('.listItem').html()).to.equal(
      '<div class="listItem"><h2>apple: $2</h2><h2>orange: $3</h2></div>'
     )
     list.unmount()
   });
+})
 
+xdescribe("Budget Header", ()=> {
+  var header;
+
+  beforeEach(() =>{
+    header = mount(<Header />)
+  })
+  afterEach(() => {
+    header.unmount()
+  })
+
+  it('should only accept numbers as input', () =>{
+  })
 })
 
 

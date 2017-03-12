@@ -10,7 +10,7 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="header">
         <h1> Budget </h1>
         <InlineEdit text={'$ ' + this.props.budget} updateBudget={this.props.updateBudget}/>
 

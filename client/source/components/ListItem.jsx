@@ -15,12 +15,11 @@ export default class ListItem extends React.Component {
   }
 
   updateItemInfo(val, ref) {
-    console.log(ref);
   }
 
   render() {
     return (
-      <div>
+      <div className="listItem">
         {this.props.list.map(function(item) {
           // return <h2 key={item.name}>{item.name + ": $" + item.price}</h2>
           return (

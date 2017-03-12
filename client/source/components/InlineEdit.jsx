@@ -37,7 +37,7 @@ export default class InlineEdit extends React.Component {
   renderElement() {
     if(this.state.editing) {
       return(
-        <div>
+        <div className ="inlineEdit">
           <input type="text" onKeyDown={this.keyAction.bind(this)} ref={input => this.textInput = input} />
         </div>
 

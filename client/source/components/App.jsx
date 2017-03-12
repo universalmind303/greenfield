@@ -47,7 +47,7 @@ export default class App extends React.Component {
   render() {
     return (
 
-      <div>
+      <div className='app'>
       	<Header budget={this.state.budget} total={this.state.total} updateBudget={this.updateBudget}/>
       	<ListItem list={this.state.list} updateTotal={this.updateTotal}/>
 

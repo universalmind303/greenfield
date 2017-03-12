@@ -13,8 +13,8 @@ import ListItem from '../source/components/ListItem.jsx';
 
 
 
-describe('Inline Edit', () =>{
-
+xdescribe('Inline Edit', () =>{
+    var app;
     beforeEach(function() {
     app= mount(<App />);  
   })
@@ -23,7 +23,7 @@ describe('Inline Edit', () =>{
     })
 
   it('should alert users if input is invalid', () =>{
-    
-    
+
+
   })
 })
