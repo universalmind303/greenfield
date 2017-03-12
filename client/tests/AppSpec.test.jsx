@@ -9,15 +9,21 @@ import sinon from 'sinon'
 import App  from '../source/components/App.jsx';
 import Header from '../source/components/Header.jsx';
 import ListItem from '../source/components/ListItem.jsx';
+import InlineEdit from '../source/components/InlineEdit.jsx';
+
+
 
 
 describe('File structure', ()=>{
   it('Header should be contained in its own file', ()=> {
     expect(Header).to.be.a.function
-  })
+  });
  it('ListItem should be contained in its own file', ()=> {
     expect(ListItem).to.be.a.function
-  })
+  });
+  it('InlineEdit should be contained in its own file', ()=> {
+    expect(InlineEdit).to.be.a.function
+  });
 
 
 
@@ -33,14 +39,14 @@ describe('App', function() {
     app= render(<App />);  
   })
 
-  it('App should render a div',()=> {
-  let result = renderer.getRenderOutput();
-  expect(result.type).to.equal('div');
-  })
 
   it('should be a stateful class component', ()=> {
     expect(React.Component.isPrototypeOf(App)).to.be.true;
   });
+  it('App should render a div',()=> {
+  let result = renderer.getRenderOutput();
+  expect(result.type).to.equal('div');
+  })
 
   it('should set budget and total', ()=> {
     app = mount(<App />)
@@ -55,6 +61,8 @@ describe('App', function() {
     expect(app.find(".header").attr()).to.deep.equal({class: 'header'})
     expect(app.find(".listItem").attr()).to.deep.equal({class: 'listItem'})
   });
+
+
   it('should submit form on click', ()=> {
     //stll need to figure out how to implement this one. 
     app = mount(<App />)
@@ -67,6 +75,8 @@ describe('App', function() {
     app.unmount();
   });
 });
+
+
 describe('List', ()=>{
   var app;
   var list;
@@ -84,10 +94,15 @@ describe('List', ()=>{
   app = mount(<App />)
   app.node.addListItem('apple', 2.00)
   app.node.addListItem('apple', 2.00)
-  expect(app.node.state['list'].length).to.equal(2)
-  app.unmount()
 
-  })
+  //either add another list item
+  expect(app.node.state['list'].length).to.equal(2)  
+  //or increase the total for the item. 
+  expect(app.node.state['list'].price).to.equal(4)
+  app.unmount()
+  });
+
+
   it('should render list items', ()=> {
     list = shallow(<ListItem list={[{name: 'apple', price: 2},{name: 'orange', price: 3}]}/>)
     expect(list.find('.listItem').html()).to.equal(
