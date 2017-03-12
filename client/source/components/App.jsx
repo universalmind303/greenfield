@@ -119,7 +119,7 @@ class Header extends React.Component {
 
 	render() {
 		return (
-			<div className="header">
+			<div>
 				<h1> Budget </h1>
 				<InlineEdit text={'$ ' + this.props.budget} updateBudget={this.props.updateBudget}/>
 
