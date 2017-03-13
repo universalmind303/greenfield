@@ -20,6 +20,11 @@ body {
   /* END: BETTER HELVETICA */
 }
 
+.half {
+  display: inline-block;
+  width: 50%;
+}
+
 /* Header */
 
 .header {
@@ -28,19 +33,14 @@ body {
   padding: .75rem;
 }
 
-.stat-block {
-  display: inline-block;
-  width: 50%;
-}
-
-.stat-block .label {
+.statBlock .label {
   font-size: 0.667rem;
   letter-spacing: .05em;
   line-height: 1.25rem;
   text-transform: uppercase;
 }
 
-.stat-block .value {
+.statBlock .value {
   font-size: 2rem;
   line-height: 2rem;
 }
@@ -60,7 +60,6 @@ li + li {
 
 .price {
   text-align: right;
-  float: right;
 }
 
 /* Forms */
