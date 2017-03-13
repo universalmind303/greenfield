@@ -25,6 +25,7 @@ body {
   width: 50%;
 }
 
+
 /* Header */
 
 .header {
@@ -33,14 +34,27 @@ body {
   padding: .75rem;
 }
 
+<<<<<<< HEAD
 .statBlock .label {
+=======
+.stat-block {
+  display: inline-block;
+  width: 50%;
+}
+
+.stat-block .label {
+>>>>>>> Style the header and list
   font-size: 0.667rem;
   letter-spacing: .05em;
   line-height: 1.25rem;
   text-transform: uppercase;
 }
 
+<<<<<<< HEAD
 .statBlock .value {
+=======
+.stat-block .value {
+>>>>>>> Style the header and list
   font-size: 2rem;
   line-height: 2rem;
 }
@@ -59,6 +73,7 @@ li + li {
 }
 
 .price {
+<<<<<<< HEAD
   text-align: right;
 }
 
@@ -119,4 +134,7 @@ input[type="submit"]:active,
 input[type="submit"].active {
   box-shadow: 0 .125rem #2980b9;
   transform: translateY(0.125rem);
+=======
+  float: right;
+>>>>>>> Style the header and list
 }
