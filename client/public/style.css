@@ -1,10 +1,58 @@
+/* General */
 * {
   box-sizing: border-box;
 }
 
 body {
-  /* BEGIN: Better Helvetica - by Chris Coyier https://css-tricks.com/snippets/css/better-helvetica/ */
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
-  /* END: Better Helvetica */
+  color: #333;
+  font-size: 1.125em; /* 16px --> 18px */
+  line-height: 1.5rem;
+
+  /*  BEGIN: BETTER HELVETICA by Chris Coyier https://css-tricks.com/snippets/css/better-helvetica/ */
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+                Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  /* END: BETTER HELVETICA */
+}
+
+/* Header */
+
+.header {
+  background-color: #3498DB;
+  color: #FFF;
+  padding: .75rem;
+}
+
+.stat-block {
+  display: inline-block;
+  width: 50%;
+}
+
+.stat-block .label {
+  font-size: 0.667rem;
+  letter-spacing: .05em;
+  line-height: 1.25rem;
+  text-transform: uppercase;
+}
+
+.stat-block .value {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+
+/* List */
+
+li {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  padding: .75rem .75rem;
+}
+
+li + li {
+  border-top: 0.05rem solid #EEE;
+}
+
+.price {
+  float: right;
 }
