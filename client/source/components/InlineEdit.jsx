@@ -26,9 +26,10 @@ export default class InlineEdit extends React.Component {
     if(e.keyCode === 13) {
       if(this.props.updateBudget) {
         this.props.updateBudget(eval(e.target.value))
-      }
-      if(this.props.updateItemInfo) {
-        this.props.updateItemInfo(e.target.value, e.target.ref)
+      } else if(this.props.updateName) {
+        this.props.updateName(e.target.value)
+      } else if(this.props.updatePrice) {
+        this.props.updatePrice(eval(e.target.value))
       }
       this.setState({editing: false})
     }

@@ -16,6 +16,8 @@ export default class App extends React.Component {
 
 	 	this.handleSubmit = this.handleSubmit.bind(this);
 		this.updateBudget = this.updateBudget.bind(this);
+		this.updateName = this.updateName.bind(this);
+		this.updatePrice = this.updatePrice.bind(this);
 	}
 
 	handleSubmit(event) {
@@ -36,7 +38,20 @@ export default class App extends React.Component {
 	updateBudget(numb) {
 		if(!isNaN(numb)){
 			this.setState({budget: numb})
-		}}
+		}
+	}
+
+	updateName(str) {
+		console.log('updateName')
+    this.setState({name: str})
+  }
+
+	updatePrice(numb) {
+		console.log('updatePrice')
+		if(!isNaN(numb)){
+			this.setState({price: numb})
+		}
+	}
 
 	addListItem(name, price) {
 		if(!isNaN(price) && typeof name === 'string'){
@@ -54,7 +69,12 @@ export default class App extends React.Component {
 
       <div className='app'>
       	<Header budget={this.state.budget} total={this.state.total} updateBudget={this.updateBudget}/>
-      	<ListItem list={this.state.list} updateTotal={this.updateTotal}/>
+      	<ListItem
+					list={this.state.list}
+					updateTotal={this.updateTotal}
+					updateName={this.updateName}
+					updatePrice={this.updatePrice}
+				/>
 
 				<form onSubmit={this.handleSubmit}>
       		<input type='text' name='name' placeholder='item' />
@@ -65,9 +85,3 @@ export default class App extends React.Component {
     )
   }
 };
-
-
-
-
-
-
