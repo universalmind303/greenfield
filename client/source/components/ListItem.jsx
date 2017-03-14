@@ -9,13 +9,13 @@ export default function ListItem (props) {
       {props.list.map(function(item) {
         return (
           <li className="listItem">
-            <div className="name half">
+            <div className="half">
               <InlineEdit
                 text={item.name}
                 updateName={props.updateName}
                 />
             </div>
-            <div className="price half">              
+            <div className="half right">
               <InlineEdit
                 text={'$ ' + item.price}
                 updatePrice={props.updatePrice}
