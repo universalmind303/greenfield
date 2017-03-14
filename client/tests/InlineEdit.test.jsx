@@ -17,16 +17,18 @@ import InlineEdit from '../source/components/InlineEdit.jsx';
 
 describe('Inline Edit', () =>{
 
-  it('should render a div', () => {
+  it('should render a span', () => {
     wrapper = shallow(<InlineEdit />) 
-    expect(wrapper.node.type).to.equal('div');
+
+    expect(wrapper.node.type).to.equal('span');
   })
   it('should generate an input forn when editing is true', () => {
     wrapper = mount(<InlineEdit />)
     wrapper.node.setState({editing: true})
     wrapper.update();
     expect(wrapper.find('.inlineEdit').html()).to
-      .equal(`<div class="inlineEdit"><input type="text"></div>`)
+      .equal(`<span class="inlineEdit"><input type="text"></span>`)
+
 
 
 
