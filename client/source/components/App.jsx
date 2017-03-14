@@ -83,7 +83,7 @@ export default class App extends React.Component {
 
 					<form onSubmit={this.handleSubmit}>
 	      		<input type='text' name='name' placeholder='item' className="threeFifths" autoFocus />
-	      		<input type='text' name='price' placeholder='price' className="fifth" />
+	      		<input type='number' name='price' placeholder='price' className="fifth" />
 	      		<input type='submit' value='Add' className="fifth" />
 	      	</form>
 				</div>

@@ -102,7 +102,8 @@ input {
   outline: none;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="number"] {
   border-top: 0.05rem solid #EEE;
   border-bottom: 0.05rem solid #EEE;
   font-size: 1rem;
@@ -110,7 +111,7 @@ input[type="text"] {
   padding: .75rem;
 }
 
-input[type="text"] + input[type="text"] {
+input[type="text"],input[type="number"] + input[type="text"],input[type="number"] {
   border-left: 0.05rem solid #EEE;
 }
 
