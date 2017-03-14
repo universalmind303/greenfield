@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header.jsx'
-import ListItem from './ListItem.jsx'
+import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 
 
@@ -74,7 +74,7 @@ export default class App extends React.Component {
       <div className='app'>
       	<Header budget={this.state.budget} total={this.state.total} updateBudget={this.updateBudget}/>
 				<div className="content">
-	      	<ListItem
+	      	<List
 						list={this.state.list}
 						updateTotal={this.updateTotal}
 						updateName={this.updateName}

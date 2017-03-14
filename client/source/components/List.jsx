@@ -3,9 +3,9 @@ import App from './App.jsx'
 import InlineEdit from './InlineEdit.jsx'
 
 
-export default function ListItem (props) {
+export default function List (props) {
   return (
-    <ul className="listItems">
+    <ul className="list">
       {props.list.map(function(item) {
         return (
           <li className="listItem">
