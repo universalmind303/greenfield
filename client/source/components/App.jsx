@@ -42,11 +42,11 @@ export default class App extends React.Component {
 	}
 
 	updateName(str) {
-		console.log('updateName')
-    console.log(str)
-    console.log(this.state)
-    let list = this.state['list']
-    this.setState({list: [{name: str}]})
+		// console.log('updateName')
+  //   console.log(str)
+  //   console.log(this.state)
+  //   let list = this.state['list']
+  //   this.setState({list: [{name: str}]})
 
   }
 
