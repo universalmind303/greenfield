@@ -18,6 +18,7 @@ export default class App extends React.Component {
 		this.updateBudget = this.updateBudget.bind(this);
 		this.updateName = this.updateName.bind(this);
 		this.updatePrice = this.updatePrice.bind(this);
+		this.removeListItem = this.removeListItem.bind(this);
 	}
 
 	handleSubmit(event) {
@@ -26,6 +27,16 @@ export default class App extends React.Component {
 		event.target.name.value = '';
 		event.target.price.value = '';
 		event.preventDefault();
+	}
+
+	//Helper function to find index of an item in list
+	//Takes the list array and a name as a target
+	nestedIndexOf(arr, itemName) {
+		for(var i = 0; i < arr.length; i++) {
+			if(arr[i][0] === itemName){
+				return i;
+			}
+		}
 	}
 
 	updateTotal(num) {
@@ -59,13 +70,31 @@ export default class App extends React.Component {
 
 	addListItem(name, price) {
 		if(!isNaN(price) && typeof name === 'string'){
+			//Make a copy of the list array in state
 			var arr = this.state.list.slice();
+
+			//Push a new item into the copied array
 			arr.push({
 				name: name,
 				price: price
 			})
+
+			//Set list equal to the copied array containing new item
 			this.setState({list: arr});
 		}
+	}
+
+	removeListItem(name) {
+		//Find the index of the item to be removed
+		var index = nestedIndexOf(name)
+		//Same process as addListItem
+		var arr = this.state.list.slice();
+
+		updateTotal(-(arr[index][1]))
+
+		arr.splice(index, 1);
+
+		this.setState({list: arr})
 	}
 
   render() {
@@ -80,6 +109,7 @@ export default class App extends React.Component {
 						updateName={this.updateName}
 						updatePrice={this.updatePrice}
 					/>
+
 
 					<form onSubmit={this.handleSubmit}>
 	      		<input type='text' name='name' placeholder='item' className="threeFifths" autoFocus />
