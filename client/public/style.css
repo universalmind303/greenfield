@@ -91,10 +91,10 @@ input[type="text"] {
 .button,
 button,
 input[type="submit"] {
-  background-color: #3498db;
+  background-color: #3498DB;
   border: none;
   border-radius: .25rem;
-  box-shadow: 0 .25rem #2980b9;
+  box-shadow: 0 .25rem #2980B9;
   color: #FFF;
   cursor: pointer;
   display: inline-block;
@@ -117,7 +117,7 @@ button:active,
 button.active,
 input[type="submit"]:active,
 input[type="submit"].active {
-  box-shadow: 0 .125rem #2980b9;
+  box-shadow: 0 .125rem #2980B9;
   transform: translateY(0.125rem);
 }
 
@@ -150,10 +150,10 @@ input[type="text"] {
 .button,
 button,
 input[type="submit"] {
-  background-color: #3498db;
+  background-color: #3498DB;
   border: none;
   border-radius: .25rem;
-  box-shadow: 0 .25rem #2980b9;
+  box-shadow: 0 .25rem #2980B9;
   color: #FFF;
   cursor: pointer;
   display: inline-block;
@@ -176,6 +176,6 @@ button:active,
 button.active,
 input[type="submit"]:active,
 input[type="submit"].active {
-  box-shadow: 0 .125rem #2980b9;
+  box-shadow: 0 .125rem #2980B9;
   transform: translateY(0.125rem);
 }
