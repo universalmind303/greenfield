@@ -45,7 +45,6 @@ export default class App extends React.Component {
 	nestedIndexOf(arr, itemName) {
 		for(var i = 0; i < arr.length; i++) {
 			if(arr[i].name === itemName){
-
 				return i;
 			}
 		}

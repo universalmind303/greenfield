@@ -5,6 +5,7 @@ import InlineEdit from './InlineEdit.jsx'
 
 export default function ListItem (props){
 
+
   return (
     <li className="listItem">
       <div className="half">
