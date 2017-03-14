@@ -4,10 +4,6 @@ import InlineEdit from './InlineEdit.jsx'
 
 
 export default function ListItem (props){
-  var itemInfo = {
-    itemName: props.item.name,
-    itemPrice: props.item.price
-  }
 
   return (
     <li className="listItem">

@@ -113,10 +113,12 @@ export default class App extends React.Component {
   render() {
     return (
 
-      <div className='app'>
+   		<div className='app'>
       	<Header budget={this.state.budget} total={this.state.total} updateBudget={this.updateBudget}/>
+
 				<div className="content">
-      	<List
+
+	      	<List
 					list={this.state.list}
 					updateName={this.updateName}
 					updatePrice={this.updatePrice}
@@ -129,6 +131,7 @@ export default class App extends React.Component {
 	      		<input type='submit' value='Add' className="fifth" />
 	      	</form>
 				</div>
+
 
       </div>
     )
