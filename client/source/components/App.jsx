@@ -122,7 +122,6 @@ export default class App extends React.Component {
 					handleRemove={this.handleRemove}
 				/>
 
-
 					<form onSubmit={this.handleSubmit}>
 	      		<input type='text' name='name' placeholder='item' className="threeFifths" autoFocus />
 	      		<input type='text' name='price' placeholder='price' className="fifth" />
