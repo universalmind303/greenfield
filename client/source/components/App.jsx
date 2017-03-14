@@ -115,21 +115,20 @@ export default class App extends React.Component {
       <div className='app'>
       	<Header budget={this.state.budget} total={this.state.total} updateBudget={this.updateBudget}/>
 				<div className="content">
-	      	<List
-						list={this.state.list}
-						updateTotal={this.updateTotal}
-						updateName={this.updateName}
-						updatePrice={this.updatePrice}
-					/>
+      	<List
+					list={this.state.list}
+					updateName={this.updateName}
+					updatePrice={this.updatePrice}
+					handleRemove={this.handleRemove}
+				/>
 
 
 					<form onSubmit={this.handleSubmit}>
-	      		<input type='text' name='name' placeholder='item' className="threeFifths" autoFocus />
-	      		<input type='number' name='price' step=".01" placeholder='price' className="fifth" />
-	      		<input type='submit' value='Add' className="fifth" />
+	      		<input type='text' name='name' placeholder='item' />
+	      		<input type='text' name='price' placeholder='price' />
+	      		<input type='submit' value='submit' />
 	      	</form>
 				</div>
-
       </div>
     )
   }
