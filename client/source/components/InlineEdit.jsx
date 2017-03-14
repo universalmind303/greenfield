@@ -4,16 +4,21 @@ import App from './App.jsx'
 export default class InlineEdit extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
       editing: false
     }
 
     this.focus = this.focus.bind(this);
+    this.blur = this.blur.bind(this);
+    this.keyAction = this.keyAction.bind(this)
+    this.editElement = this.editElement.bind(this)
   }
 
   focus() {
     this.textInput.focus();
+  }
+  blur(e) {
+    this.setState({editing: false})
   }
 
   editElement() {
@@ -23,13 +28,15 @@ export default class InlineEdit extends React.Component {
   }
 
   keyAction(e) {
-    if(e.keyCode === 13) {
+    if(e.keyCode === 27) {
+      this.setState({editing: false})
+    } else if(e.keyCode === 13) {
       if(this.props.updateBudget) {
-        this.props.updateBudget(eval(e.target.value))
+        this.props.updateBudget('' + e.target.value)
       } else if(this.props.updateName) {
-        this.props.updateName(e.target.value)
+        this.props.updateName('' + e.target.value)
       } else if(this.props.updatePrice) {
-        this.props.updatePrice(eval(e.target.value))
+        this.props.updatePrice('' + e.target.value)
       }
       this.setState({editing: false})
     }
@@ -39,13 +46,12 @@ export default class InlineEdit extends React.Component {
     if(this.state.editing) {
       return(
         <div className ="inlineEdit">
-          <input type="text" onKeyDown={this.keyAction.bind(this)} ref={input => this.textInput = input} />
+          <input type="text" onBlur={this.blur}onKeyDown={this.keyAction}  ref={input => this.textInput = input} />
         </div>
-
       )
     } else {
       return(
-        <div onClick={this.editElement.bind(this)}>
+        <div onClick={this.editElement}>
           {this.props.text}
         </div>
       )

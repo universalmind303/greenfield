@@ -55,31 +55,31 @@ describe('App', function() {
     app.unmount()
   });
   it('should only accept numbers as price inputs', function(){
-
       //it should handle truthy/falsy inputs, i fixed it to ignore all except truthy/falsy
+    var inputs = [
+      1,
+      'an invalid input',
+      {},
+      {fake: 'data'},
+      [1,2,3,4,5,6],
+      true,
+      false,
+      undefined
+    ]
     app = mount(<App />)
-    var num = 11
-    app.node.updateBudget(num)
-    app.node.updateBudget('an invalid input')
-    app.node.updateBudget({})
-    app.node.updateBudget({fake: 'data'})
-    app.node.updateBudget(['more bad data', num])
-    // app.node.updateBudget(true)
-    // app.node.updateBudget(false)
-    // app.node.updateBudget(undefined)
-    expect(app.node.state['budget']).to.equal(num)
 
-    app.node.updateTotal(num)
-    app.node.updateTotal('an invalid input')
-    app.node.updateTotal({})
-    app.node.updateTotal({fake: 'data'})
-    app.node.updateTotal(['more bad data', num])
-    // app.node.updateTotal(true)
-    // app.node.updateTotal(false)
-    // app.node.updateTotal(undefined)
-    expect(app.node.state['total']).to.equal(num)
+    inputs.forEach(input => app.node.updateBudget(input))
+    inputs.forEach(input => app.node.updateTotal(input))
+    expect(app.node.state['budget']).to.equal(1)
+    expect(app.node.state['total']).to.equal(1)
     app.unmount()
   });
+  it('should be able to add list items', function(){
+    app = mount(<App/>)
+    app.node.addListItem('strawberry',10)
+    expect(app.node.state['list'].length).to.equal(1)
+    app.unmount()
+  })
   it('should handle invalid inputs', function(){
     app = mount(<App/>)
     app.node.addListItem('strawberry',10)
@@ -88,14 +88,6 @@ describe('App', function() {
     app.node.addListItem(null, null)
     expect(app.node.state['list'].length).to.equal(1)
     app.unmount()
-
-  })
-  it('should be able to add list items', function(){
-    app = mount(<App/>)
-    app.node.addListItem('strawberry',10)
-    expect(app.node.state['list'].length).to.equal(1)
-    app.unmount()
-
   })
 
   xit('should submit form on click', function() {
@@ -103,7 +95,7 @@ describe('App', function() {
 });
 
 
-xdescribe('List', ()=>{
+describe('List', ()=>{
   var app;
   var list;
   it('should render list items', ()=>  {
@@ -116,7 +108,7 @@ xdescribe('List', ()=>{
 
 
 
-  it("should handle 2 of the same inputs", ()=> {
+  xit("should handle 2 of the same inputs", ()=> {
     // not 100% on how you should handle this one, but it definitly needs to handle 2 of the same items.
   list = shallow(<ListItem list={[{name: 'apple', price: 2}, {name: 'apple', price: 2}]}/>)
 
@@ -130,7 +122,7 @@ xdescribe('List', ()=>{
 
 })
 
-xdescribe("Budget", ()=> {
+describe("Budget", ()=> {
   var header;
   var app;
 
