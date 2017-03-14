@@ -75,7 +75,7 @@ input[type="text"] {
   padding: .5rem;
 }
 
-.inline-edit input[type="text"] {
+.inlineEdit input[type="text"] {
   background: transparent;
   border: none;
   color: inherit;
@@ -134,7 +134,7 @@ input[type="text"] {
   padding: .5rem;
 }
 
-.inline-edit input[type="text"] {
+.inlineEdit input[type="text"] {
   background: transparent;
   border: none;
   color: inherit;
