@@ -7,22 +7,11 @@ export default function List (props) {
   return (
     <ul className="list">
       {props.list.map(function(item) {
-        return (
-          <li className="listItem">
-            <div className="half">
-              <InlineEdit
-                text={item.name}
-                updateName={props.updateName}
-                />
-            </div>
-            <div className="half right">
-              <InlineEdit
-                text={'$ ' + item.price}
-                updatePrice={props.updatePrice}
-                />
-            </div>
-        </li>
-        )
+
+        return <ListItem
+          item={item}
+          handleRemove={props.handleRemove}
+        />
       })}
     </ul>
   )
