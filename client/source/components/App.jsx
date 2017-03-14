@@ -23,7 +23,10 @@ export default class App extends React.Component {
 	}
 
 	handleSubmit(event) {
+    console.log(event.target.name.value)
+    if(event.target.name.value){
 		this.addListItem(event.target.name.value, Number(event.target.price.value));
+    }
 		this.updateTotal(Number(event.target.price.value));
 		event.target.name.value = '';
 		event.target.price.value = '';
@@ -61,7 +64,7 @@ export default class App extends React.Component {
 	}
 
 	updateName(str) {
-		// console.log('updateName')
+		console.log('updateName')
   //   console.log(str)
   //   console.log(this.state)
   //   let list = this.state['list']
