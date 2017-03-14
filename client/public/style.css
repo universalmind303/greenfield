@@ -71,11 +71,7 @@ body {
    * Sticky Header
    * TODO: replace hard-coded height with JavaScript so it can be any height
    */
-<<<<<<< 0dfb82ec9b26738e4b13b3c69457c213a7cd057e
 
-=======
-   
->>>>>>> Implement a primitive sticky header
   .header {
     width: 100%;
     position: fixed;
@@ -116,6 +112,7 @@ input[type="number"] {
 }
 
 input[type="text"],input[type="number"] + input[type="text"],input[type="number"] {
+
   border-left: 0.05rem solid #EEE;
 }
 
