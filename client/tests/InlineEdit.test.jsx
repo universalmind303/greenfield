@@ -20,12 +20,12 @@ describe('Inline Edit', () =>{
 
   it('should allow to escape out of edit', () =>{
     wrapper = mount(<InlineEdit />)
-    var spy = sinon.spy(eval)
+    var spy = sinon.spy(wrapper.node, 'keyAction')
+    wrapper.update()
     wrapper.node.setState({editing: true})
-    console.log(spy)
     wrapper.find(".inlineEdit").simulate("keyDown", {
       keyCode: 27,
     });
-    expect(wrapper.node.state['editing']).to.equal(false)
+    expect(InlineEdit.prototype.keyAction.calledOnce).to.equal(true); 
   });
 })

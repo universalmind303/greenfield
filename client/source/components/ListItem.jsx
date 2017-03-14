@@ -6,7 +6,7 @@ import InlineEdit from './InlineEdit.jsx'
 export default function ListItem (props) {
   return (
     <div className="listItems">
-      {props.list.map(function(item, index) {
+      {props.list.map(function(item) {
         return (
           <div className="listItem">
             <InlineEdit

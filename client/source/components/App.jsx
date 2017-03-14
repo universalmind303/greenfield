@@ -21,35 +21,39 @@ export default class App extends React.Component {
 	}
 
 	handleSubmit(event) {
-		this.addListItem(event.target.name.value, event.target.price.value);
-		this.updateTotal(eval(event.target.price.value));
+		this.addListItem(event.target.name.value, Number(event.target.price.value));
+		this.updateTotal(Number(event.target.price.value));
 		event.target.name.value = '';
 		event.target.price.value = '';
 		event.preventDefault();
 	}
 
-	updateTotal(numb) {
-		if(!isNaN(numb)){
-			var newTotal = this.state.total + numb;
+	updateTotal(num) {
+		if(!isNaN(num)){
+			var newTotal = this.state.total + num;
 			this.setState({total: newTotal})
 		}
 	}
 
-	updateBudget(numb) {
-		if(!isNaN(numb)){
-			this.setState({budget: numb})
+	updateBudget(num) {
+		if(!isNaN(num)){
+			this.setState({budget: num})
 		}
 	}
 
 	updateName(str) {
 		console.log('updateName')
-    this.setState({name: str})
+    console.log(str)
+    console.log(this.state)
+    let list = this.state['list']
+    this.setState({list: [{name: str}]})
+
   }
 
-	updatePrice(numb) {
+	updatePrice(num) {
 		console.log('updatePrice')
-		if(!isNaN(numb)){
-			this.setState({price: numb})
+		if(!isNaN(num)){
+			this.setState({price: num})
 		}
 	}
 
