@@ -29,10 +29,10 @@ export default class App extends React.Component {
 		event.preventDefault();
 	}
 
-	handleRemove('???') {
-		console.log('???');
+	handleRemove(x) {
+		console.log(x);
 
-		removeListItem('???')
+		removeListItem(x)
 		event.preventDefault();
 	}
 
@@ -109,6 +109,7 @@ export default class App extends React.Component {
 
       <div className='app'>
       	<Header budget={this.state.budget} total={this.state.total} updateBudget={this.updateBudget}/>
+<<<<<<< bea71f708a186bf77501f5cf83c1e10726c67d11
 				<div className="content">
 	      	<List
 						list={this.state.list}
@@ -125,6 +126,20 @@ export default class App extends React.Component {
 	      	</form>
 				</div>
 
+=======
+      	<List
+					list={this.state.list}
+					updateName={this.updateName}
+					updatePrice={this.updatePrice}
+					handleRemove={this.handleRemove}
+				/>
+
+				<form onSubmit={this.handleSubmit}>
+      		<input type='text' name='name' placeholder='item' />
+      		<input type='text' name='price' placeholder='price' />
+      		<input type='submit' value='submit' />
+      	</form>
+>>>>>>> Refactored files to have 'List' and 'ListItem' functions
       </div>
     )
   }

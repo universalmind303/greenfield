@@ -27,3 +27,8 @@ export default function List (props) {
     </ul>
   )
 }
+
+/*-------------------
+22  updateName={props.updateName}
+28  updatePrice={props.updatePrice}
+-------------------*/
