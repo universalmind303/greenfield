@@ -22,7 +22,7 @@ export default class App extends React.Component {
 
 	handleSubmit(event) {
 		this.addListItem(event.target.name.value, event.target.price.value);
-		this.updateTotal(eval(event.target.price.value));
+		this.updateTotal(event.target.price.value);
 		event.target.name.value = '';
 		event.target.price.value = '';
 		event.preventDefault();

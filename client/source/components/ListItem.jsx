@@ -21,10 +21,12 @@ export default class ListItem extends React.Component {
           return (
             <div className="listItem">
               <InlineEdit
+                key={item.id}
                 text={item.name}
                 updateName={this.props.updateName}
               />
             <InlineEdit
+                key={item.id}
                 text={'$ ' + item.price}
                 updatePrice={this.props.updatePrice}
               />
