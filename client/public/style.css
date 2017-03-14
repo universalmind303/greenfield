@@ -17,14 +17,35 @@ body {
   /* END: BETTER HELVETICA */
 }
 
-.half {
-  display: inline-block;
-  width: 50%;
-}
+
+/* Layut */
 
 .right {
   text-align: right;
 }
+
+.half,
+.fifth,
+.twoFifths {
+  display: inline-block;
+}
+
+.half {
+  width: 50%;
+}
+
+.fifth {
+  width: 20%;
+}
+
+.twoFifths {
+  width: 40%;
+}
+
+.threeFifths {
+  width: 60%;
+}
+
 
 /* Header */
 
@@ -50,7 +71,7 @@ body {
    * Sticky Header
    * TODO: replace hard-coded height with JavaScript so it can be any height
    */
-   
+
   .header {
     width: 100%;
     position: fixed;
@@ -77,14 +98,36 @@ li + li {
 /* Forms */
 
 input {
+  border: none;
   outline: none;
 }
 
 input[type="text"] {
-  border: 0.05rem solid #EEE;
-  font-size: 0.667rem;
-  line-height: 1.25rem;
-  padding: .5rem;
+  border-top: 0.05rem solid #EEE;
+  border-bottom: 0.05rem solid #EEE;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: .75rem;
+}
+
+input[type="text"] + input[type="text"] {
+  border-left: 0.05rem solid #EEE;
+}
+
+input[type="submit"] {
+  background-color: #3498DB;
+  border: 0.05rem solid #3498DB;
+  color: #FFF;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  outline: none;
+  padding: .75rem 1.25rem;
+}
+
+input[type="submit"]:active {
+  background-color: #2980b9;
 }
 
 .inlineEdit input[type="text"] {
@@ -98,96 +141,4 @@ input[type="text"] {
   padding: inherit;
   text-align: inherit;
   text-transform: inherit;
-}
-
-.button,
-button,
-input[type="submit"] {
-  background-color: #3498DB;
-  border: none;
-  border-radius: .25rem;
-  box-shadow: 0 .25rem #2980B9;
-  color: #FFF;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 0.667rem;
-  line-height: 1.25rem;
-  outline: none;
-  padding: .5rem 1rem;
-}
-
-.button:hover,
-button:hover,
-input[type="submit"]:hover {
-  background-color: #41A5E8;
-  text-decoration: none;
-}
-
-.button:active,
-.buton.active,
-button:active,
-button.active,
-input[type="submit"]:active,
-input[type="submit"].active {
-  box-shadow: 0 .125rem #2980B9;
-  transform: translateY(0.125rem);
-}
-
-/* Forms */
-
-input {
-  outline: none;
-}
-
-input[type="text"] {
-  border: 0.05rem solid #EEE;
-  font-size: 0.667rem;
-  line-height: 1.25rem;
-  padding: .5rem;
-}
-
-.inlineEdit input[type="text"] {
-  background: transparent;
-  border: none;
-  color: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  margin: inherit;
-  padding: inherit;
-  text-align: inherit;
-  text-transform: inherit;
-}
-
-.button,
-button,
-input[type="submit"] {
-  background-color: #3498DB;
-  border: none;
-  border-radius: .25rem;
-  box-shadow: 0 .25rem #2980B9;
-  color: #FFF;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 0.667rem;
-  line-height: 1.25rem;
-  outline: none;
-  padding: .5rem 1rem;
-}
-
-.button:hover,
-button:hover,
-input[type="submit"]:hover {
-  background-color: #41A5E8;
-  text-decoration: none;
-}
-
-.button:active,
-.buton.active,
-button:active,
-button.active,
-input[type="submit"]:active,
-input[type="submit"].active {
-  box-shadow: 0 .125rem #2980B9;
-  transform: translateY(0.125rem);
 }
