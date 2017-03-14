@@ -29,6 +29,13 @@ export default class App extends React.Component {
 		event.preventDefault();
 	}
 
+	handleRemove('???') {
+		console.log('???');
+
+		removeListItem('???')
+		event.preventDefault();
+	}
+
 	//Helper function to find index of an item in list
 	//Takes the list array and a name as a target
 	nestedIndexOf(arr, itemName) {
@@ -117,6 +124,7 @@ export default class App extends React.Component {
 	      		<input type='submit' value='Add' className="fifth" />
 	      	</form>
 				</div>
+
       </div>
     )
   }
