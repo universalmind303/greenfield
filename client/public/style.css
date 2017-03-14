@@ -10,9 +10,6 @@ html {
 body {
   color: #333;
   line-height: 1.5rem;
-  max-width:30rem;
-  margin:0 auto;
-
   /*  BEGIN: BETTER HELVETICA by Chris Coyier https://css-tricks.com/snippets/css/better-helvetica/ */
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
                 Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -49,6 +46,21 @@ body {
   line-height: 2rem;
 }
 
+  /*
+   * Sticky Header
+   * TODO: replace hard-coded height with JavaScript so it can be any height
+   */
+   
+  .header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 5rem;
+  }
+
+  .content {
+    padding-top: 5rem;
+  }
 
 /* List */
 
