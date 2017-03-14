@@ -45,15 +45,15 @@ export default class InlineEdit extends React.Component {
   renderElement() {
     if(this.state.editing) {
       return(
-        <div className ="inlineEdit">
+        <span className ="inlineEdit">
           <input type="text" onBlur={this.blur}onKeyDown={this.keyAction}  ref={input => this.textInput = input} />
-        </div>
+        </span>
       )
     } else {
       return(
-        <div onClick={this.editElement}>
+        <span onClick={this.editElement}>
           {this.props.text}
-        </div>
+        </span>
       )
     }
   }
