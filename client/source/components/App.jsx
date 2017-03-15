@@ -22,6 +22,18 @@ export default class App extends React.Component {
 		this.removeListItem = this.removeListItem.bind(this);
 	}
 
+	componentWillMount() {
+		var total = JSON.parse(localStorage.getItem('total')) || 0;
+		var budget = JSON.parse(localStorage.getItem('budget')) || 0;
+		var list = JSON.parse(localStorage.getItem('list')) || [];
+
+		this.setState({
+			total: total,
+			budget: budget,
+			list: list
+		})
+	}
+
 	handleSubmit(event) {
     console.log(event.target.name.value)
     if(event.target.name.value){
@@ -53,6 +65,7 @@ export default class App extends React.Component {
 	updateTotal(num) {
 		if(!isNaN(num)){
 			var newTotal = this.state.total + num;
+			localStorage.setItem('total', JSON.stringify(newTotal))
 			this.setState({total: newTotal})
 		}
 	}
@@ -60,6 +73,7 @@ export default class App extends React.Component {
 	updateBudget(num) {
 		if(!isNaN(num)){
 			this.setState({budget: num})
+			localStorage.setItem('budget', JSON.stringify(num))
 		}
 	}
 
@@ -90,6 +104,7 @@ export default class App extends React.Component {
 				price: price
 			})
 
+			localStorage.setItem('list', JSON.stringify(arr));
 			//Set list equal to the copied array containing new item
 			this.setState({list: arr});
 		}
@@ -106,6 +121,7 @@ export default class App extends React.Component {
 		arr.splice(index, 1);
 		console.log('post splice arr', arr)
 
+		localStorage.setItem('list', JSON.stringify(arr))
 		this.setState({list: arr})
 	}
 
