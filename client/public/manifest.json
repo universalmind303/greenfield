@@ -1,0 +1,29 @@
+{
+  "short_name": "Grocery Bag",
+  "name": "Grocery Bag",
+  "description": "Stay in budget while shopping",
+  "icons": [
+    {
+      "src": "images/icon-launcher-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "images/icon-launcher-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "images/icon-launcher-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "related_applications": [{
+    "platform": "web"
+  }],
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#3498DB",
+  "background_color": "#FFFFFF"
+}
