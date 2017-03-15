@@ -8,6 +8,7 @@ export default function List (props) {
     <ul className="listItems">
       {props.list.map(function(item) {
         return <ListItem
+          key={Math.random()}
           item={item}
           handleRemove={props.handleRemove}
         />
