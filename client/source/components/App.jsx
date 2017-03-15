@@ -40,11 +40,13 @@ export default class App extends React.Component {
 		event.preventDefault();
 	}
 
+
 	//Helper function to find index of an item in list
 	//Takes the list array and a name as a target
 	nestedIndexOf(arr, itemName) {
 		for(var i = 0; i < arr.length; i++) {
 			if(arr[i].name === itemName){
+
 				return i;
 			}
 		}
