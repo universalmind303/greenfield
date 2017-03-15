@@ -22,6 +22,23 @@ export default class App extends React.Component {
 		this.removeListItem = this.removeListItem.bind(this);
 	}
 
+	componentWillMount() {
+		///Call function to set list and budget in state
+		console.log('called')
+	}
+
+	getListStorage() {
+		//Set state to local storage or empty array
+	}
+
+	getBudgetStorage() {
+		//Set state to local storage or 0
+	}
+
+	setListStorage() {
+
+	}
+
 	handleSubmit(event) {
     console.log(event.target.name.value)
     if(event.target.name.value){
@@ -90,6 +107,7 @@ export default class App extends React.Component {
 				price: price
 			})
 
+			localStorage.setItem('list', JSON.stringify(arr));
 			//Set list equal to the copied array containing new item
 			this.setState({list: arr});
 		}
@@ -106,6 +124,7 @@ export default class App extends React.Component {
 		arr.splice(index, 1);
 		console.log('post splice arr', arr)
 
+		localStorage.setItem('list', JSON.stringify(arr))
 		this.setState({list: arr})
 	}
 
