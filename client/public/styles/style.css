@@ -49,11 +49,22 @@ body {
 
 /* Header */
 
-.header {
+.onBudget {
   background-color: #3498DB;
   color: #FFF;
   padding: .75rem;
 }
+.warningBudget {
+  background-color: #F39C12;
+  color: #FFF;
+  padding: .75rem;
+}
+.overBudget {
+  background-color: #E74C3C;
+  color: #FFF;
+  padding: .75rem;
+}
+
 
 .statBlock .label {
   font-size: 0.667rem;

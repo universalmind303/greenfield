@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import sinon from 'sinon'
 
 import App  from '../source/components/App.jsx';
+import List from '../source/components/List.jsx';
+
 import Header from '../source/components/Header.jsx';
 import ListItem from '../source/components/ListItem.jsx';
 import InlineEdit from '../source/components/InlineEdit.jsx';
@@ -99,8 +101,8 @@ describe('List', ()=>{
   var app;
   var list;
   it('should render list items', ()=>  {
-    list = shallow(<ListItem list={[{name: 'apple', price: 2},{name: 'orange', price: 3}]}/>)
-    expect(list.node.type).to.equal('div')
+    list = shallow(<List ListItem item={[{name: 'apple', price: 2},{name: 'orange', price: 3}]} />)
+    expect(list.node.type).to.equal('ul')
     expect(list.find('.listItems').children().length).to.equal(2)
     expect(list.find('.listItems').html()).to.exist
     list.unmount()
@@ -108,7 +110,7 @@ describe('List', ()=>{
 
 
 
-  xit("should handle 2 of the same inputs", ()=> {
+  it("should handle 2 of the same inputs", ()=> {
     // not 100% on how you should handle this one, but it definitly needs to handle 2 of the same items.
   list = shallow(<ListItem list={[{name: 'apple', price: 2}, {name: 'apple', price: 2}]}/>)
 
