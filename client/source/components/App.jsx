@@ -23,20 +23,15 @@ export default class App extends React.Component {
 	}
 
 	componentWillMount() {
-		///Call function to set list and budget in state
-		console.log('called')
-	}
+		var total = JSON.parse(localStorage.getItem('total')) || 0;
+		var budget = JSON.parse(localStorage.getItem('budget')) || 0;
+		var list = JSON.parse(localStorage.getItem('list')) || [];
 
-	getListStorage() {
-		//Set state to local storage or empty array
-	}
-
-	getBudgetStorage() {
-		//Set state to local storage or 0
-	}
-
-	setListStorage() {
-
+		this.setState({
+			total: total,
+			budget: budget,
+			list: list
+		})
 	}
 
 	handleSubmit(event) {
@@ -70,6 +65,7 @@ export default class App extends React.Component {
 	updateTotal(num) {
 		if(!isNaN(num)){
 			var newTotal = this.state.total + num;
+			localStorage.setItem('total', JSON.stringify(newTotal))
 			this.setState({total: newTotal})
 		}
 	}
