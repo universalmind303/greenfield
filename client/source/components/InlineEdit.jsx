@@ -34,6 +34,7 @@ export default class InlineEdit extends React.Component {
       if(this.props.updateBudget) {
         this.props.updateBudget('' + e.target.value)
       } else if(this.props.updateName) {
+        console.log(e.target.value)
         this.props.updateName('' + e.target.value)
       } else if(this.props.updatePrice) {
         this.props.updatePrice('' + e.target.value)
@@ -52,6 +53,7 @@ export default class InlineEdit extends React.Component {
     } else {
       return(
         <span onClick={this.editElement}>
+
           {this.props.text}
         </span>
       )

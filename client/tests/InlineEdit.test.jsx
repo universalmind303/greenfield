@@ -16,16 +16,55 @@ import InlineEdit from '../source/components/InlineEdit.jsx';
 
 
 describe('Inline Edit', () =>{
+
+  it('should render a span', () => {
+    wrapper = shallow(<InlineEdit />) 
+
+    expect(wrapper.node.type).to.equal('span');
+  })
+  it('should generate an input forn when editing is true', () => {
+    wrapper = mount(<InlineEdit />)
+    wrapper.node.setState({editing: true})
+    wrapper.update();
+    expect(wrapper.find('.inlineEdit').html()).to
+      .equal(`<span class="inlineEdit"><input type="text"></span>`)
+
+
+
+
+  })
   var wrapper;
 
-  it('should allow to escape out of edit', () =>{
+  it('should allow user to escape out of edit', () =>{
     wrapper = mount(<InlineEdit />)
-    var spy = sinon.spy(wrapper.node, 'keyAction')
-    wrapper.update()
-    wrapper.node.setState({editing: true})
-    wrapper.find(".inlineEdit").simulate("keyDown", {
+    var mock = {
       keyCode: 27,
-    });
-    expect(InlineEdit.prototype.keyAction.calledOnce).to.equal(true); 
+      target: {value: 0}
+    }
+    wrapper.node.setState({editing: true})
+    wrapper.node.keyAction(mock)
+    expect(wrapper.node.state['editing']).to.equal(false)
+    wrapper.unmount();
   });
+
+  xit('should allow user to escape out of edit', () =>{
+    wrapper = mount(<InlineEdit />)
+    let app = mount(<App /> )
+    wrapper.node.keyAction.props = app.node.updateBudget
+
+    var mock = {
+      keyCode: 13,
+      target: {value: 0}
+    }
+    wrapper.node.setState({editing: true})
+    wrapper.node.keyAction(mock)
+    expect(wrapper.node.state['editing']).to.equal(false)
+    console.log(wrapper.find('.value').html())
+    wrapper.unmount();
+  });
+
+  xit('should ....', () => {
+    wrapper = mount(<InlineEdit />)
+    let app = mount(<App /> )
+  })
 })

@@ -7,16 +7,8 @@ export default function List (props) {
   return (
     <ul className="listItems">
       {props.list.map(function(item) {
-        return <ListItem
-          item={item}
-          handleRemove={props.handleRemove}
-        />
+        return <ListItem item={item} />
       })}
     </ul>
   )
 }
-
-/*-------------------
-22  updateName={props.updateName}
-28  updatePrice={props.updatePrice}
--------------------*/

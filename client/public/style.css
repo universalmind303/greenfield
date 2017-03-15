@@ -112,6 +112,7 @@ input[type="number"] {
 }
 
 input[type="text"],input[type="number"] + input[type="text"],input[type="number"] {
+
   border-left: 0.05rem solid #EEE;
 }
 
