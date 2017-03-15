@@ -55,12 +55,12 @@ body {
   padding: .75rem;
 }
 .warningBudget {
-  background-color: #FF0;
+  background-color: #F39C12;
   color: #FFF;
   padding: .75rem;
 }
 .overBudget {
-  background-color: #F00;
+  background-color: #E74C3C;
   color: #FFF;
   padding: .75rem;
 }
