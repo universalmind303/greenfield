@@ -17,7 +17,12 @@ export default ({budget, updateBudget, total}) => {
       <div className="statBlock half">
         <div className="label">Budget</div>
         <div className="value">
-          $ <InlineEdit text={budget} updateBudget={updateBudget}/>
+          <InlineEdit
+            value={budget}
+            action={updateBudget}
+            type="number"
+            prefix="$ "
+          />
         </div>
       </div>
       <div className="statBlock half right">

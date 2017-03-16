@@ -25,9 +25,9 @@ export default class App extends React.Component {
 		this.handleInputChange = this.handleInputChange.bind(this)
 	}
 
-	roundToTwo(num) {    
+	roundToTwo(num) {
     return +(Math.round(num + "e+2")  + "e-2")|| 0;
-	}	
+	}
 
 	componentWillMount() {
 		var total = JSON.parse(localStorage.getItem('total')) || 0;
@@ -40,7 +40,7 @@ export default class App extends React.Component {
 			list: list
 		})
 	}
-	
+
 	handleInputChange() {
 		this.setState({validInput: ""})
 	}
@@ -124,13 +124,13 @@ export default class App extends React.Component {
 			if(!isNaN(price) && typeof name === 'string'){
 				//Make a copy of the list array in state
 				var arr = this.state.list.slice();
-	
+
 				//Push a new item into the copied array
 				arr.push({
 					name: name,
 					price: price
 				})
-	
+
 				localStorage.setItem('list', JSON.stringify(arr));
 				//Set list equal to the copied array containing new item
 				this.setState({list: arr});
@@ -155,9 +155,9 @@ export default class App extends React.Component {
   render() {
     return (
    		<div className='app'>
-      	<Header 
-      		budget={this.state.budget} 
-      		total={this.roundToTwo(this.state.total)} 
+      	<Header
+      		budget={this.state.budget}
+      		total={this.roundToTwo(this.state.total)}
       		updateBudget={this.updateBudget}
       	/>
 				<div className="content">
@@ -169,18 +169,18 @@ export default class App extends React.Component {
 					/>
 
 					<form onSubmit={this.handleSubmit}>
-	      		<input 
-	      			type='text' 
-	      			name='name' 
-	      			placeholder='item' 
-	      			className="threeFifths" 
-	      			autoFocus 
+	      		<input
+	      			type='text'
+	      			name='name'
+	      			placeholder='item'
+	      			className="threeFifths"
+	      			autoFocus
 	      			onChange={this.handleInputChange}
 	      		/>
-	      		<input 
-	      			type='text' 
+	      		<input
+	      			type='text'
 	      			name='price'
-	      			placeholder='price' 
+	      			placeholder='price'
 	      			className="fifth" 
 	      		/>
 	      		<input disabled={this.state.validInput} type='submit' value='Add' className="fifth" />

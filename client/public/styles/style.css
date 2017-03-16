@@ -109,7 +109,23 @@ input {
   outline: none;
 }
 
-input[type="text"],
+.inlineEdit input {
+  background: transparent;
+  border: none;
+  color: inherit;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  text-transform: inherit;
+  margin: inherit;
+  padding: inherit;
+}
+
+/*input[type="text"],
 input[type="number"] {
   border-top: 0.05rem solid #EEE;
   border-bottom: 0.05rem solid #EEE;
@@ -119,7 +135,6 @@ input[type="number"] {
 }
 
 input[type="text"],input[type="number"] + input[type="text"],input[type="number"] {
-
   border-left: 0.05rem solid #EEE;
 }
 
@@ -137,17 +152,4 @@ input[type="submit"] {
 
 input[type="submit"]:active {
   background-color: #2980b9;
-}
-
-.inlineEdit input[type="text"] {
-  background: transparent;
-  border: none;
-  color: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  margin: inherit;
-  padding: inherit;
-  text-align: inherit;
-  text-transform: inherit;
-}
+}*/
