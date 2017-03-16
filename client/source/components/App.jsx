@@ -116,7 +116,7 @@ export default class App extends React.Component {
 	}
 
 	addListItem(name, price) {
-		if(name.length){
+		if(name){
 			price = this.roundToTwo(price)
 			if(!isNaN(price) && typeof name === 'string'){
 				//Make a copy of the list array in state
