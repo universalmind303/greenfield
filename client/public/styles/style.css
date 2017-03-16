@@ -132,6 +132,7 @@ input {
   text-transform: inherit;
   margin: inherit;
   padding: inherit;
+  width: inherit !important;
 }
 
 .addItem {
