@@ -75,7 +75,6 @@ export default class App extends React.Component {
 	}
 
 	updateBudget(num) {
-		num = this.roundToTwo(num)
 		if(!isNaN(num)){
 			this.setState({budget: num})
 			localStorage.setItem('budget', JSON.stringify(num))
