@@ -23,7 +23,7 @@ export default class App extends React.Component {
 		this.roundToTwo = this.roundToTwo.bind(this)
 	}
 	roundToTwo(num) {    
-    return +(Math.round(num + "e+2")  + "e-2");
+    return +(Math.round(num + "e+2")  + "e-2")|| 0;
 	}	
 
 	componentWillMount() {
@@ -67,7 +67,6 @@ export default class App extends React.Component {
 	}
 
 	updateTotal(num) {
-		num = this.roundToTwo(num)		
 		if(!isNaN(num)){
 			var newTotal = this.state.total + num;
 			localStorage.setItem('total', JSON.stringify(newTotal))
@@ -96,7 +95,6 @@ export default class App extends React.Component {
   }
 
 	updatePrice(itemPrice, item) {
-		itemPrice = this.roundToTwo(itemPrice)
 		if(!isNaN(itemPrice)){
 			var arr = this.state.list.slice();
 			var index = this.nestedIndexOf(arr, item.name, item.price)
@@ -149,7 +147,7 @@ export default class App extends React.Component {
    		<div className='app'>
       	<Header 
       		budget={this.state.budget} 
-      		total={this.state.total} 
+      		total={this.roundToTwo(this.state.total)} 
       		updateBudget={this.updateBudget}
       	/>
 				<div className="content">
