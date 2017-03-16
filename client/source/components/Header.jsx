@@ -25,7 +25,7 @@ export default ({budget, updateBudget, total}) => {
               />
           </div>
         </div>
-        <div className="column half">
+        <div className="column half right">
           <div className="statLabel">Total</div>
           <div className="statValue">$ {total}</div>
         </div>

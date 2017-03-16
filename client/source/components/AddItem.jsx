@@ -7,15 +7,15 @@ export default function AddItem (props) {
         className="column half"
         type='text'
         name='name'
-        placeholder='item'
+        placeholder='Item'
         autoFocus
         />
       <input
-        className="column fourth right"
+        className="column fourth"
         type='number'
         step='.01'
         name='price'
-        placeholder='price'
+        placeholder='Price'
         />
       <input
         className="column fourth"
