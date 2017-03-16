@@ -78,7 +78,7 @@ export default class App extends React.Component {
 	updateBudget(num) {
 		console.log('updateBudget');
 		if(!isNaN(num)){
-			this.setState({budget: num})
+			this.setState({budget: num || 0})
 			localStorage.setItem('budget', JSON.stringify(num))
 		}
 	}
@@ -103,7 +103,7 @@ export default class App extends React.Component {
 			var index = this.nestedIndexOf(arr, item.name, item.price)
 			var newItem = {
 				name: item.name,
-				price: itemPrice
+				price: itemPrice || 0
 			}
 			this.updateTotal(itemPrice - item.price)
 			arr.splice(index, 1, newItem);
