@@ -49,22 +49,34 @@ body {
 
 /* Header */
 
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  height: 5rem;
+  padding: .75rem;
+  /* TODO: replace hard-coded height with JavaScript so it can be any height */
+}
+
+.content {
+  padding-top: 5rem;
+}
+
 .onBudget {
   background-color: #3498DB;
   color: #FFF;
-  padding: .75rem;
 }
+
 .warningBudget {
   background-color: #F39C12;
   color: #FFF;
   padding: .75rem;
 }
+
 .overBudget {
   background-color: #E74C3C;
   color: #FFF;
-  padding: .75rem;
 }
-
 
 .statBlock .label {
   font-size: 0.667rem;
@@ -77,22 +89,6 @@ body {
   font-size: 2rem;
   line-height: 2rem;
 }
-
-  /*
-   * Sticky Header
-   * TODO: replace hard-coded height with JavaScript so it can be any height
-   */
-
-  .header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    height: 5rem;
-  }
-
-  .content {
-    padding-top: 5rem;
-  }
 
 /* List */
 
