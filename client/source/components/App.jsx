@@ -20,7 +20,11 @@ export default class App extends React.Component {
 		this.updateName = this.updateName.bind(this);
 		this.updatePrice = this.updatePrice.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
+		this.roundToTwo = this.roundToTwo.bind(this)
 	}
+	roundToTwo(num) {    
+    return +(Math.round(num + "e+2")  + "e-2");
+	}	
 
 	componentWillMount() {
 		var total = JSON.parse(localStorage.getItem('total')) || 0;
@@ -33,9 +37,9 @@ export default class App extends React.Component {
 			list: list
 		})
 	}
+	
 
 	handleSubmit(event) {
-    console.log(event.target.name.value)
     if(event.target.name.value){
 			this.addListItem(event.target.name.value, Number(event.target.price.value));
     }
@@ -63,6 +67,7 @@ export default class App extends React.Component {
 	}
 
 	updateTotal(num) {
+		num = this.roundToTwo(num)		
 		if(!isNaN(num)){
 			var newTotal = this.state.total + num;
 			localStorage.setItem('total', JSON.stringify(newTotal))
@@ -91,7 +96,7 @@ export default class App extends React.Component {
   }
 
 	updatePrice(itemPrice, item) {
-		console.log('updatePrice')
+		itemPrice = this.roundToTwo(itemPrice)
 		if(!isNaN(itemPrice)){
 			var arr = this.state.list.slice();
 			var index = this.nestedIndexOf(arr, item.name, item.price)
@@ -107,6 +112,7 @@ export default class App extends React.Component {
 	}
 
 	addListItem(name, price) {
+		price = this.roundToTwo(price)
 		if(!isNaN(price) && typeof name === 'string'){
 			//Make a copy of the list array in state
 			var arr = this.state.list.slice();
