@@ -17,89 +17,91 @@ body {
   /* END: BETTER HELVETICA */
 }
 
-
-/* Layut */
-
 .right {
   text-align: right;
-}
-
-.half,
-.fifth,
-.twoFifths {
-  display: inline-block;
-}
-
-.half {
-  width: 50%;
-}
-
-.fifth {
-  width: 20%;
-}
-
-.twoFifths {
-  width: 40%;
-}
-
-.threeFifths {
-  width: 60%;
 }
 
 
 /* Header */
 
 .header {
+  background-color: #3498DB;
+  color: #FFF;
   width: 100%;
   position: fixed;
   top: 0;
   height: 5rem;
-  padding: .75rem;
+  /*padding: .75rem;*/
   /* TODO: replace hard-coded height with JavaScript so it can be any height */
 }
 
-.content {
-  padding-top: 5rem;
-}
+.onBudget { background-color: #3498DB; }
 
-.onBudget {
-  background-color: #3498DB;
-  color: #FFF;
-}
+.warningBudget { background-color: #F39C12; }
 
-.warningBudget {
-  background-color: #F39C12;
-  color: #FFF;
-  padding: .75rem;
-}
+.overBudget { background-color: #E74C3C; }
 
-.overBudget {
-  background-color: #E74C3C;
-  color: #FFF;
-}
-
-.statBlock .label {
+.statLabel {
   font-size: 0.667rem;
   letter-spacing: .05em;
   line-height: 1.25rem;
   text-transform: uppercase;
 }
 
-.statBlock .value {
+.statValue {
   font-size: 2rem;
   line-height: 2rem;
 }
 
 /* List */
 
-li {
+.list {
+  width: 100%;
+  border-collapse: collapse;
   font-size: 1.25rem;
   line-height: 1.5rem;
-  padding: .75rem .75rem;
+  margin-top: 5rem;
 }
 
-li + li {
-  border-top: 0.05rem solid #EEE;
+.listItem {
+  border-bottom: 0.05rem solid #EEE;
+}
+
+.listItem td {
+  padding: 0.75rem;
+}
+
+.listItem .name {
+  width: 60%;
+}
+
+.listItem .price {
+  width: 30%;
+  text-align: right;
+}
+
+.listItem .action {
+  border-right: 0.05rem solid #EEE;
+  padding: 0;
+  text-align: center;
+  width: 10%;
+}
+
+.listItem .action button {
+  color: #ccc;
+  cursor: pointer;
+  display: block;
+  font-size: 1rem;
+  padding: 0.75rem;
+  margin: 0;
+  width: 100%;
+}
+
+.listItem .action button:hover,
+.listItem .action button:active {
+  background-color: #E74C3C;
+  border-color: #E74C3C;
+  color: #FFF;
 }
 
 /* Forms */
@@ -109,9 +111,14 @@ input {
   outline: none;
 }
 
+.inlineEdit {
+  display:block;
+  width: 100%;
+}
+
 .inlineEdit input {
   background: transparent;
-  border: none;
+  border: inherit;
   color: inherit;
   display: inline;
   font-family: inherit;
@@ -125,20 +132,18 @@ input {
   padding: inherit;
 }
 
-/*input[type="text"],
-input[type="number"] {
-  border-top: 0.05rem solid #EEE;
+.addItem {
   border-bottom: 0.05rem solid #EEE;
+}
+
+.addItem input {
+  border-right: 0.05rem solid #EEE;
+  padding: 0.75rem;
   font-size: 1rem;
   line-height: 1.5rem;
-  padding: .75rem;
 }
 
-input[type="text"],input[type="number"] + input[type="text"],input[type="number"] {
-  border-left: 0.05rem solid #EEE;
-}
-
-input[type="submit"] {
+.addItem input[type="submit"] {
   background-color: #3498DB;
   border: 0.05rem solid #3498DB;
   color: #FFF;
@@ -150,6 +155,6 @@ input[type="submit"] {
   padding: .75rem 1.25rem;
 }
 
-input[type="submit"]:active {
+.addItem input[type="submit"]:active {
   background-color: #2980b9;
-}*/
+}

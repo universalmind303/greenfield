@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './Header.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
+import AddItem from './AddItem.jsx'
 
 
 export default class App extends React.Component {
@@ -26,7 +27,7 @@ export default class App extends React.Component {
 	}
 
 	roundToTwo(num) {
-    return +(Math.round(num + "e+2")  + "e-2")|| 0;
+		return +(Math.round(num + "e+2")  + "e-2")|| 0;
 	}
 
 	componentWillMount() {
@@ -46,14 +47,15 @@ export default class App extends React.Component {
 	}
 
 	handleSubmit(event) {
-    if(event.target.name.value){
+		if(event.target.name.value){
 			this.addListItem(event.target.name.value, Number(event.target.price.value));
 			this.updateTotal(Number(event.target.price.value));
     }
-			event.target.name.value = '';
-			event.target.price.value = '';
-    	this.setState({validInput: "disabled"})
-			event.preventDefault();
+		event.target.name.value = '';
+		event.target.price.value = '';
+		event.target.name.focus();
+  	this.setState({validInput: "disabled"});
+		event.preventDefault();
 	}
 
 	handleRemove(item) {
@@ -100,7 +102,7 @@ export default class App extends React.Component {
 		arr.splice(index, 1, newItem);
 		localStorage.setItem('list', JSON.stringify(arr))
 		this.setState({list: arr})
-  }
+	}
 
 	updatePrice(itemPrice, item) {
 		console.log('updatePrice');
@@ -152,41 +154,21 @@ export default class App extends React.Component {
 		this.setState({list: arr})
 	}
 
-  render() {
-    return (
-   		<div className='app'>
-      	<Header
-      		budget={this.state.budget}
-      		total={this.roundToTwo(this.state.total)}
-      		updateBudget={this.updateBudget}
-      	/>
-				<div className="content">
-	      	<List
-						list={this.state.list}
-						updateName={this.updateName}
-						updatePrice={this.updatePrice}
-						handleRemove={this.handleRemove}
+	render() {
+		return (
+			<div className='app'>
+				<Header
+					budget={this.state.budget}
+					total={this.roundToTwo(this.state.total)}
+					updateBudget={this.updateBudget}
 					/>
-
-					<form onSubmit={this.handleSubmit}>
-	      		<input
-	      			type='text'
-	      			name='name'
-	      			placeholder='item'
-	      			className="threeFifths"
-	      			autoFocus
-	      			onChange={this.handleInputChange}
-	      		/>
-	      		<input
-	      			type='text'
-	      			name='price'
-	      			placeholder='price'
-	      			className="fifth" 
-	      		/>
-	      		<input disabled={this.state.validInput} type='submit' value='Add' className="fifth" />
-	      	</form>
-				</div>
-      </div>
-    )
-  }
-};
+				<List
+					list={this.state.list}
+					updateName={this.updateName}
+					updatePrice={this.updatePrice}
+					handleRemove={this.handleRemove}
+					/>
+				<AddItem handleSubmit={this.handleSubmit} disabled={this.state.validInput}/>
+			</div>
+		)
+	}

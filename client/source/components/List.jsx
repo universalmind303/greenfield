@@ -5,23 +5,20 @@ import ListItem from './ListItem.jsx'
 
 export default function List (props) {
   return (
-    <ul className="listItems">
-      {props.list.map(function(item) {
-        return (
-          <ListItem 
-            item={item} 
-            key={Math.random()} 
-            handleRemove={props.handleRemove} 
-            updateName={props.updateName}
-            updatePrice={props.updatePrice}
-          />
-        )
-      })}
-    </ul>
+    <table className="list">
+      <tbody>
+        {props.list.map(function(item) {
+          return (
+            <ListItem
+              item={item}
+              key={Math.random()}
+              handleRemove={props.handleRemove}
+              updateName={props.updateName}
+              updatePrice={props.updatePrice}
+              />
+          )
+        })}
+      </tbody>
+    </table>
   )
 }
-
-/*-------------------
-22  updateName={props.updateName}
-28  updatePrice={props.updatePrice}
--------------------*/

@@ -4,25 +4,27 @@ import InlineEdit from './InlineEdit.jsx'
 
 export default function ListItem (props){
   return (
-    <li className="listItem">
-      <div className="half">
+    <tr className="listItem">
+      <td className="action">
+        <button onClick={() => {props.handleRemove(props.item)}}>
+          <i className="fa fa-trash" aria-hidden="true"></i>
+        </button>
+      </td>
+      <td className="name">
         <InlineEdit
           value={props.item.name}
           action={(value) => {props.updateName(value, props.item)}}
           type="text"
-        />
-      </div>
-      <div className="half right">
+          />
+      </td>
+      <td className="price">
         <InlineEdit
           value={props.item.price}
           action={(value) => {props.updatePrice(value, props.item)}}
           type="number"
-          prefix="$ "
-        />
-        <button onClick={() => {props.handleRemove(props.item)}}>
-          <i className="fa fa-trash" aria-hidden="true"></i>
-        </button>
-      </div>
-    </li>
+          prefix="$&nbsp;"
+          />
+      </td>
+    </tr>
   )
 }

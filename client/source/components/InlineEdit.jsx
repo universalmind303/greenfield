@@ -46,7 +46,7 @@ export default class InlineEdit extends React.Component {
     if(this.state.editing) {
       return(
         <span className="inlineEdit">
-          {this.props.prefix}
+          <span className="prefix">{this.props.prefix}</span>
           <input
             className="inlineEditInput"
             type={this.props.type || 'text'}
@@ -61,7 +61,7 @@ export default class InlineEdit extends React.Component {
     } else {
       return(
         <span onClick={this.editElement} className="inlineEdit">
-          {this.props.prefix}{this.props.value}
+          <span className="prefix">{this.props.prefix}</span>{this.props.value}
         </span>
       )
     }
