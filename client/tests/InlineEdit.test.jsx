@@ -47,20 +47,8 @@ describe('Inline Edit', () =>{
     wrapper.unmount();
   });
 
-  xit('should allow user to escape out of edit', () =>{
-    wrapper = mount(<InlineEdit />)
-    let app = mount(<App /> )
-    wrapper.node.keyAction.props = app.node.updateBudget
+  xit('should....', () =>{
 
-    var mock = {
-      keyCode: 13,
-      target: {value: 0}
-    }
-    wrapper.node.setState({editing: true})
-    wrapper.node.keyAction(mock)
-    expect(wrapper.node.state['editing']).to.equal(false)
-    console.log(wrapper.find('.value').html())
-    wrapper.unmount();
   });
 
   xit('should ....', () => {
