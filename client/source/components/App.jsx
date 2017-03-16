@@ -11,7 +11,8 @@ export default class App extends React.Component {
 	 	this.state = {
 	 		total: 0,
 	 		budget: 0,
-	 		list: []
+	 		list: [],
+	 		validInput: "disabled"
 	 	}
 
 	 	this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,6 +22,7 @@ export default class App extends React.Component {
 		this.updatePrice = this.updatePrice.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
 		this.roundToTwo = this.roundToTwo.bind(this)
+		this.handleInputChange = this.handleInputChange.bind(this)
 	}
 
 	roundToTwo(num) {    
@@ -39,15 +41,19 @@ export default class App extends React.Component {
 		})
 	}
 	
+	handleInputChange() {
+		this.setState({validInput: ""})
+	}
 
 	handleSubmit(event) {
     if(event.target.name.value){
 			this.addListItem(event.target.name.value, Number(event.target.price.value));
+			this.updateTotal(Number(event.target.price.value));
     }
-		this.updateTotal(Number(event.target.price.value));
-		event.target.name.value = '';
-		event.target.price.value = '';
-		event.preventDefault();
+			event.target.name.value = '';
+			event.target.price.value = '';
+    	this.setState({validInput: "disabled"})
+			event.preventDefault();
 	}
 
 	handleRemove(item) {
@@ -113,21 +119,22 @@ export default class App extends React.Component {
 	}
 
 	addListItem(name, price) {
-		price = this.roundToTwo(price)
-		if(!isNaN(price) && typeof name === 'string'){
-			//Make a copy of the list array in state
-			var arr = this.state.list.slice();
-
-			//Push a new item into the copied array
-			arr.push({
-				name: name,
-				price: price
-			})
-
-			localStorage.setItem('list', JSON.stringify(arr));
-			//Set list equal to the copied array containing new item
-			this.setState({list: arr});
-		}
+		if(name){
+			price = this.roundToTwo(price)
+			if(!isNaN(price) && typeof name === 'string'){
+				//Make a copy of the list array in state
+				var arr = this.state.list.slice();
+	
+				//Push a new item into the copied array
+				arr.push({
+					name: name,
+					price: price
+				})
+	
+				localStorage.setItem('list', JSON.stringify(arr));
+				//Set list equal to the copied array containing new item
+				this.setState({list: arr});
+			}}
 	}
 
 	removeListItem(item) {
@@ -168,14 +175,15 @@ export default class App extends React.Component {
 	      			placeholder='item' 
 	      			className="threeFifths" 
 	      			autoFocus 
+	      			onChange={this.handleInputChange}
 	      		/>
 	      		<input 
 	      			type='text' 
-	      			name='price' 
+	      			name='price'
 	      			placeholder='price' 
 	      			className="fifth" 
 	      		/>
-	      		<input type='submit' value='Add' className="fifth" />
+	      		<input disabled={this.state.validInput} type='submit' value='Add' className="fifth" />
 	      	</form>
 				</div>
       </div>
