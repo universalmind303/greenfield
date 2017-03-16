@@ -22,6 +22,7 @@ export default class App extends React.Component {
 		this.updatePrice = this.updatePrice.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
 		this.roundToTwo = this.roundToTwo.bind(this)
+		this.handleInputChange = this.handleInputChange.bind(this)
 	}
 
 	roundToTwo(num) {    
@@ -40,10 +41,12 @@ export default class App extends React.Component {
 		})
 	}
 	
+	handleInputChange() {
+		this.setState({validInput: ""})
+	}
 
 	handleSubmit(event) {
     if(event.target.name.value){
-    	this.setState({validInput: ""})
 			this.addListItem(event.target.name.value, Number(event.target.price.value));
 			this.updateTotal(Number(event.target.price.value));
     }
@@ -165,21 +168,22 @@ export default class App extends React.Component {
 						handleRemove={this.handleRemove}
 					/>
 
-					<form disabled={this.state.validInput}onSubmit={this.handleSubmit}>
+					<form onSubmit={this.handleSubmit}>
 	      		<input 
 	      			type='text' 
 	      			name='name' 
 	      			placeholder='item' 
 	      			className="threeFifths" 
 	      			autoFocus 
+	      			onChange={this.handleInputChange}
 	      		/>
 	      		<input 
 	      			type='text' 
-	      			name='price' 
+	      			name='price'
 	      			placeholder='price' 
 	      			className="fifth" 
 	      		/>
-	      		<input type='submit' value='Add' className="fifth" />
+	      		<input disabled={this.state.validInput} type='submit' value='Add' className="fifth" />
 	      	</form>
 				</div>
       </div>
