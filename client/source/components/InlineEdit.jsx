@@ -17,6 +17,7 @@ export default class InlineEdit extends React.Component {
   focus() {
     this.textInput.focus();
   }
+
   blur(e) {
     this.setState({editing: false})
   }
@@ -34,7 +35,6 @@ export default class InlineEdit extends React.Component {
       if(this.props.updateBudget) {
         this.props.updateBudget('' + e.target.value)
       } else if(this.props.updateName) {
-        console.log(e.target.value)
         this.props.updateName('' + e.target.value)
       } else if(this.props.updatePrice) {
         this.props.updatePrice('' + e.target.value)
@@ -47,13 +47,18 @@ export default class InlineEdit extends React.Component {
     if(this.state.editing) {
       return(
         <span className ="inlineEdit">
-          <input type="text" onBlur={this.blur}onKeyDown={this.keyAction}  ref={input => this.textInput = input} />
+          <input 
+          	type="text" 
+          	onBlur={this.blur} 
+          	onKeyDown={this.keyAction} 
+          	ref={input => this.textInput = input} 
+          	defaultValue={this.props.text}
+          />
         </span>
       )
     } else {
       return(
         <span onClick={this.editElement}>
-
           {this.props.text}
         </span>
       )
