@@ -52,7 +52,7 @@ export default class InlineEdit extends React.Component {
           	onBlur={this.blur} 
           	onKeyDown={this.keyAction} 
           	ref={input => this.textInput = input} 
-          	defaultValue={this.props.text}
+          	defaultValue = {this.props.text}
           />
         </span>
       )

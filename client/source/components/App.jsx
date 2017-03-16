@@ -22,6 +22,7 @@ export default class App extends React.Component {
 		this.removeListItem = this.removeListItem.bind(this);
 		this.roundToTwo = this.roundToTwo.bind(this)
 	}
+
 	roundToTwo(num) {    
     return +(Math.round(num + "e+2")  + "e-2")|| 0;
 	}	
@@ -50,8 +51,7 @@ export default class App extends React.Component {
 	}
 
 	handleRemove(item) {
-		console.log(item);
-
+		console.log('handleRemove', item);
 		this.removeListItem(item)
 		event.preventDefault();
 	}
@@ -68,6 +68,7 @@ export default class App extends React.Component {
 
 	updateTotal(num) {
 		if(!isNaN(num)){
+			num = Number(num);
 			var newTotal = this.state.total + num;
 			localStorage.setItem('total', JSON.stringify(newTotal))
 			this.setState({total: newTotal})
@@ -75,6 +76,7 @@ export default class App extends React.Component {
 	}
 
 	updateBudget(num) {
+		console.log('updateBudget');
 		if(!isNaN(num)){
 			this.setState({budget: num})
 			localStorage.setItem('budget', JSON.stringify(num))
@@ -95,6 +97,7 @@ export default class App extends React.Component {
   }
 
 	updatePrice(itemPrice, item) {
+		console.log('updatePrice');
 		if(!isNaN(itemPrice)){
 			var arr = this.state.list.slice();
 			var index = this.nestedIndexOf(arr, item.name, item.price)
