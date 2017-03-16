@@ -2,13 +2,14 @@ import React from 'react'
 
 export default function AddItem (props) {
   return (
-    <form onSubmit={props.handleSubmit} noValidate className="addItem clearfix">
+    <form onSubmit={props.handleSubmit} className="addItem clearfix">
       <input
         className="column half"
         type='text'
         name='name'
         placeholder='Item'
         autoFocus
+        onChange={props.handleInputChange}
         />
       <input
         className="column fourth"

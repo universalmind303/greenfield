@@ -168,7 +168,11 @@ export default class App extends React.Component {
 					updatePrice={this.updatePrice}
 					handleRemove={this.handleRemove}
 					/>
-				<AddItem handleSubmit={this.handleSubmit} disabled={this.state.validInput}/>
+				<AddItem
+					handleSubmit={this.handleSubmit}
+					disabled={this.state.validInput}
+					handleInputChange={this.handleInputChange}
+					/>
 			</div>
 		)
 	}
