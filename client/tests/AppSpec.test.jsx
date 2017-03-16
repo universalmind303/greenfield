@@ -38,7 +38,7 @@ describe('File structure', ()=>{
 
 describe('App', function() {
   var app;
-
+  beforeEach(() => localStorage.clear())
   it('should be a stateful class component', function() {
     expect(React.Component.isPrototypeOf(App)).to.be.true;
   });
@@ -52,7 +52,7 @@ describe('App', function() {
   it('Components should have a div class',function(){
     app = render(<App />)  
     expect(app.find(".app").attr()).to.deep.equal({class: 'app'})
-    expect(app.find(".header").attr()).to.deep.equal({class: 'header'})
+    expect(app.find(".onBudget").attr()).to.deep.equal({class: 'onBudget'})
     expect(app.find(".listItems").attr()).to.deep.equal({class: 'listItems'})
   });
 
@@ -112,8 +112,9 @@ describe('List', ()=>{
   beforeEach(() => localStorage.clear())
 
   it('should render list items', ()=>  {
-    list = shallow(<List ListItem item={[{name: 'apple', price: 2},{name: 'orange', price: 3}]} />)
-    expect(list.node.type).to.equal('ul')
+    list = mount(<App />)
+    list.node.addListItem('apple',2)
+    list.node.addListItem('orange',1)
     expect(list.find('.listItems').children().length).to.equal(2)
     expect(list.find('.listItems').html()).to.exist
     list.unmount()
@@ -122,10 +123,12 @@ describe('List', ()=>{
 
 
   it("should handle 2 of the same inputs", ()=> {
-  list = mount(<List list={[{name: 'apple', price: 2}, {name: 'apple', price: 2}]}/>)
+  list = mount(<App />)
+  list.node.addListItem('apple',2)
+  list.node.addListItem('apple',2)
   expect(list.find('.listItems').children().length).to.equal(2)
   expect(list.find('.listItem').first().text()).to.equal('apple$ 2')
-  expect(list.find('.listItem').first().text()).to.equal('apple$ 2')
+  expect(list.find('.listItem').last().text()).to.equal('apple$ 2')
   list.unmount()
   });
 

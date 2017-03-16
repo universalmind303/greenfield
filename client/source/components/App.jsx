@@ -20,7 +20,12 @@ export default class App extends React.Component {
 		this.updateName = this.updateName.bind(this);
 		this.updatePrice = this.updatePrice.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
+		this.roundToTwo = this.roundToTwo.bind(this)
 	}
+
+	roundToTwo(num) {    
+    return +(Math.round(num + "e+2")  + "e-2")|| 0;
+	}	
 
 	componentWillMount() {
 		var total = JSON.parse(localStorage.getItem('total')) || 0;
@@ -33,9 +38,9 @@ export default class App extends React.Component {
 			list: list
 		})
 	}
+	
 
 	handleSubmit(event) {
-    console.log(event.target.name.value)
     if(event.target.name.value){
 			this.addListItem(event.target.name.value, Number(event.target.price.value));
     }
@@ -46,8 +51,7 @@ export default class App extends React.Component {
 	}
 
 	handleRemove(item) {
-		console.log(item);
-
+		console.log('handleRemove', item);
 		this.removeListItem(item)
 		event.preventDefault();
 	}
@@ -64,6 +68,7 @@ export default class App extends React.Component {
 
 	updateTotal(num) {
 		if(!isNaN(num)){
+			num = Number(num);
 			var newTotal = this.state.total + num;
 			localStorage.setItem('total', JSON.stringify(newTotal))
 			this.setState({total: newTotal})
@@ -71,8 +76,9 @@ export default class App extends React.Component {
 	}
 
 	updateBudget(num) {
+		console.log('updateBudget');
 		if(!isNaN(num)){
-			this.setState({budget: num})
+			this.setState({budget: num || 0})
 			localStorage.setItem('budget', JSON.stringify(num))
 		}
 	}
@@ -91,13 +97,13 @@ export default class App extends React.Component {
   }
 
 	updatePrice(itemPrice, item) {
-		console.log('updatePrice')
+		console.log('updatePrice');
 		if(!isNaN(itemPrice)){
 			var arr = this.state.list.slice();
 			var index = this.nestedIndexOf(arr, item.name, item.price)
 			var newItem = {
 				name: item.name,
-				price: itemPrice
+				price: itemPrice || 0
 			}
 			this.updateTotal(itemPrice - item.price)
 			arr.splice(index, 1, newItem);
@@ -107,6 +113,7 @@ export default class App extends React.Component {
 	}
 
 	addListItem(name, price) {
+		price = this.roundToTwo(price)
 		if(!isNaN(price) && typeof name === 'string'){
 			//Make a copy of the list array in state
 			var arr = this.state.list.slice();
@@ -143,7 +150,7 @@ export default class App extends React.Component {
    		<div className='app'>
       	<Header 
       		budget={this.state.budget} 
-      		total={this.state.total} 
+      		total={this.roundToTwo(this.state.total)} 
       		updateBudget={this.updateBudget}
       	/>
 				<div className="content">
