@@ -37,7 +37,7 @@ export default class App extends React.Component {
 	handleSubmit(event) {
     console.log(event.target.name.value)
     if(event.target.name.value){
-		this.addListItem(event.target.name.value, Number(event.target.price.value));
+			this.addListItem(event.target.name.value, Number(event.target.price.value));
     }
 		this.updateTotal(Number(event.target.price.value));
 		event.target.name.value = '';
@@ -54,9 +54,9 @@ export default class App extends React.Component {
 
 	//Helper function to find index of an item in list
 	//Takes the list array and a name as a target
-	nestedIndexOf(arr, itemName) {
+	nestedIndexOf(arr, itemName, itemPrice) {
 		for(var i = 0; i < arr.length; i++) {
-			if(arr[i].name === itemName){
+			if(arr[i].name === itemName && arr[i].price === itemPrice){
 				return i;
 			}
 		}
@@ -77,19 +77,32 @@ export default class App extends React.Component {
 		}
 	}
 
-	updateName(str) {
+	updateName(itemName, item) {
 		console.log('updateName')
-  //   console.log(str)
-  //   console.log(this.state)
-  //   let list = this.state['list']
-  //   this.setState({list: [{name: str}]})
-
+		var arr = this.state.list.slice();
+		var index = this.nestedIndexOf(arr, item.name, item.price)
+		var newItem = {
+			name: itemName,
+			price: item.price
+		}
+		arr.splice(index, 1, newItem);
+		localStorage.setItem('list', JSON.stringify(arr))
+		this.setState({list: arr})
   }
 
-	updatePrice(num) {
+	updatePrice(itemPrice, item) {
 		console.log('updatePrice')
-		if(!isNaN(num)){
-			this.setState({price: num})
+		if(!isNaN(itemPrice)){
+			var arr = this.state.list.slice();
+			var index = this.nestedIndexOf(arr, item.name, item.price)
+			var newItem = {
+				name: item.name,
+				price: itemPrice
+			}
+			this.updateTotal(itemPrice - item.price)
+			arr.splice(index, 1, newItem);
+			localStorage.setItem('list', JSON.stringify(arr))
+			this.setState({list: arr})
 		}
 	}
 
@@ -114,7 +127,7 @@ export default class App extends React.Component {
 		//Same process as addListItem
 		var arr = this.state.list.slice();
 		//Find the index of the item to be removed
-		var index = this.nestedIndexOf(arr, item.name)
+		var index = this.nestedIndexOf(arr, item.name, item.price)
 
 		this.updateTotal(-(item.price))
 
@@ -127,27 +140,37 @@ export default class App extends React.Component {
 
   render() {
     return (
-
    		<div className='app'>
-      	<Header budget={this.state.budget} total={this.state.total} updateBudget={this.updateBudget}/>
-
+      	<Header 
+      		budget={this.state.budget} 
+      		total={this.state.total} 
+      		updateBudget={this.updateBudget}
+      	/>
 				<div className="content">
-
 	      	<List
-					list={this.state.list}
-					updateName={this.updateName}
-					updatePrice={this.updatePrice}
-					handleRemove={this.handleRemove}
-				/>
+						list={this.state.list}
+						updateName={this.updateName}
+						updatePrice={this.updatePrice}
+						handleRemove={this.handleRemove}
+					/>
 
 					<form onSubmit={this.handleSubmit}>
-	      		<input type='text' name='name' placeholder='item' className="threeFifths" autoFocus />
-	      		<input type='text' name='price' placeholder='price' className="fifth" />
+	      		<input 
+	      			type='text' 
+	      			name='name' 
+	      			placeholder='item' 
+	      			className="threeFifths" 
+	      			autoFocus 
+	      		/>
+	      		<input 
+	      			type='text' 
+	      			name='price' 
+	      			placeholder='price' 
+	      			className="fifth" 
+	      		/>
 	      		<input type='submit' value='Add' className="fifth" />
 	      	</form>
 				</div>
-
-
       </div>
     )
   }
