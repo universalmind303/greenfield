@@ -13,7 +13,7 @@ export default ({budget, updateBudget, total}) => {
   }
 
   return (
-    <div className="header">
+    <div className={"header " + header}>
         <div className="column half">
           <div className="statLabel">Budget</div>
           <div className="statValue">
