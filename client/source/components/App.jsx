@@ -61,9 +61,10 @@ export default class App extends React.Component {
 		event.preventDefault();
 	}
 	handleClear() {
-  alert("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")
-  this.setState({list: []})
-  localStorage.clear()
+	  if(confirm("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")){
+	    this.setState({list: []})
+	    localStorage.removeItem('list')
+  	}
 	}
 
 
@@ -157,7 +158,6 @@ export default class App extends React.Component {
 					/>
 				<Footer
 					list={this.state.list}
-					save={save}
 					clear={this.handleClear}
 					example={'hello'}
 				/>
