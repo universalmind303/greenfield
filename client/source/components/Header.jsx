@@ -9,21 +9,26 @@ export default ({budget, updateBudget, total}) => {
       header = "warningBudget";
     } else if( total >= budget) {
       header = 'overBudget'
-    } 
+    }
   }
 
   return (
-    <div className={header}>
-      <div className="statBlock half">
-        <div className="label">Budget</div>
-        <div className="value">
-          $ <InlineEdit text={budget} updateBudget={updateBudget}/>
+    <div className={"header " + header}>
+        <div className="column half">
+          <div className="statLabel">Budget</div>
+          <div className="statValue">
+            <InlineEdit
+              value={budget}
+              action={updateBudget}
+              type="number"
+              prefix="$&nbsp;"
+              />
+          </div>
         </div>
-      </div>
-      <div className="statBlock half right">
-        <div className="label">Total</div>
-        <div className="value">$ {total}</div>
-      </div>
+        <div className="column half right">
+          <div className="statLabel">Total</div>
+          <div className="statValue">$ {total}</div>
+        </div>
     </div>
   )
 }

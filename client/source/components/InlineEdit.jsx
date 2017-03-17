@@ -5,21 +5,24 @@ export default class InlineEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      value: props.value,
       editing: false
     }
-
-    this.focus = this.focus.bind(this);
-    this.blur = this.blur.bind(this);
+    this.focus = this.focus.bind(this)
+    this.blur = this.blur.bind(this)
     this.keyAction = this.keyAction.bind(this)
     this.editElement = this.editElement.bind(this)
   }
 
   focus() {
-    this.textInput.focus();
+    this.textInput.focus()
+    this.textInput.select()
   }
 
   blur(e) {
+    console.log('blur')
     this.setState({editing: false})
+    if(this.props.action){ this.props.action(e.target.value) }
   }
 
   editElement() {
@@ -32,34 +35,30 @@ export default class InlineEdit extends React.Component {
     if(e.keyCode === 27) {
       this.setState({editing: false})
     } else if(e.keyCode === 13) {
-      if(this.props.updateBudget) {
-        this.props.updateBudget('' + e.target.value)
-      } else if(this.props.updateName) {
-        this.props.updateName('' + e.target.value)
-      } else if(this.props.updatePrice) {
-        this.props.updatePrice('' + e.target.value)
-      }
-      this.setState({editing: false})
+      this.blur(e);
     }
   }
 
   renderElement() {
     if(this.state.editing) {
       return(
-        <span className ="inlineEdit">
-          <input 
-          	type="text" 
-          	onBlur={this.blur} 
-          	onKeyDown={this.keyAction} 
-          	ref={input => this.textInput = input} 
-          	defaultValue = {this.props.text}
-          />
+        <span className="inlineEdit">
+          <input
+            className="inlineEditInput"
+            type={this.props.type || 'text'}
+            onBlur={this.blur}
+            onKeyDown={this.keyAction}
+            ref={input => this.textInput = input}
+            defaultValue={this.props.value}
+            step=".01"
+            />
         </span>
       )
     } else {
       return(
-        <span onClick={this.editElement}>
-          {this.props.text}
+        <span onClick={this.editElement} className="inlineEdit">
+          <span className="prefix">{this.props.prefix}</span>
+          {this.props.value}
         </span>
       )
     }
