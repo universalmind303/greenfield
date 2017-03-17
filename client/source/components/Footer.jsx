@@ -1,12 +1,10 @@
 import React from 'react'
 import App from './App.jsx'
-import InlineEdit from './InlineEdit.jsx'
 
-export default ({example}) => {
-
+export default function ({example, clear}) {
   return (
     <div className='footer'>
-      <div>{example}</div>
+      <input type="submit" value="Clear all" onClick={clear}/>
     </div>
   )
 }
