@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header.jsx'
-import {roundToTwo, nestedIndexOf, handleClear} from './utils.jsx'
+import {roundToTwo, nestedIndexOf, save} from './utils.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
@@ -61,9 +61,10 @@ export default class App extends React.Component {
 		event.preventDefault();
 	}
 	handleClear() {
-  alert("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")
-  this.setState({list: []})
-  localStorage.clear()
+	  if(confirm("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")){
+	    this.setState({list: []})
+	    localStorage.removeItem('list')
+  	}
 	}
 
 
@@ -156,6 +157,7 @@ export default class App extends React.Component {
 					handleInputChange={this.handleInputChange}
 					/>
 				<Footer
+					list={this.state.list}
 					clear={this.handleClear}
 					example={'hello'}
 				/>
