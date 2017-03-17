@@ -1,44 +1,32 @@
 import React from 'react'
 import Header from './Header.jsx'
+import {roundToTwo, nestedIndexOf} from './utils.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
-
+import Footer from './Footer.jsx'
 
 export default class App extends React.Component {
 	constructor(props){
 	  super(props)
-
 	 	this.state = {
 	 		budget: 0,
 	 		list: [],
 	 		validInput: "disabled"
 	 	}
-
 	 	this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleRemove = this.handleRemove.bind(this);
 		this.updateBudget = this.updateBudget.bind(this);
 		this.updateName = this.updateName.bind(this);
 		this.updatePrice = this.updatePrice.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
-		this.roundToTwo = this.roundToTwo.bind(this)
 		this.handleInputChange = this.handleInputChange.bind(this)
 	}
 
-	roundToTwo(num) {
-		return Math.round(num * 100)/100;
-	}
-
-	calculateTotal() {
-		return this.roundToTwo(
-			this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 )
-		);
-	}
 
 	componentWillMount() {
 		var budget = JSON.parse(localStorage.getItem('budget')) || 0;
 		var list = JSON.parse(localStorage.getItem('list')) || [];
-
 		this.setState({
 			budget: budget,
 			list: list
@@ -48,6 +36,12 @@ export default class App extends React.Component {
 	handleInputChange() {
 		this.setState({validInput: ""})
 	}
+
+    calculateTotal() {
+  		return roundToTwo(
+    		this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 )
+  	)
+  }
 
 	handleSubmit(event) {
 		if(event.target.name.value){
@@ -66,15 +60,7 @@ export default class App extends React.Component {
 		event.preventDefault();
 	}
 
-	//Helper function to find index of an item in list
-	//Takes the list array and a name as a target
-	nestedIndexOf(arr, itemName, itemPrice) {
-		for(var i = 0; i < arr.length; i++) {
-			if(arr[i].name === itemName && arr[i].price === itemPrice){
-				return i;
-			}
-		}
-	}
+
 
 	updateBudget(num) {
 		console.log('updateBudget');
@@ -87,7 +73,7 @@ export default class App extends React.Component {
 	updateName(itemName, item) {
 		console.log('updateName')
 		var arr = this.state.list.slice();
-		var index = this.nestedIndexOf(arr, item.name, item.price)
+		var index = nestedIndexOf(arr, item.name, item.price)
 		var newItem = {
 			name: itemName,
 			price: item.price
@@ -101,7 +87,7 @@ export default class App extends React.Component {
 		console.log('updatePrice');
 		if(!isNaN(itemPrice)){
 			var arr = this.state.list.slice();
-			var index = this.nestedIndexOf(arr, item.name, item.price)
+			var index = nestedIndexOf(arr, item.name, item.price)
 			var newItem = {
 				name: item.name,
 				price: itemPrice || 0
@@ -114,7 +100,7 @@ export default class App extends React.Component {
 
 	addListItem(name, price) {
 		if(name){
-			price = this.roundToTwo(price)
+			price = roundToTwo(price)
 			if(!isNaN(price) && typeof name === 'string'){
 				//Make a copy of the list array in state
 				var arr = this.state.list.slice();
@@ -135,7 +121,7 @@ export default class App extends React.Component {
 		//Same process as addListItem
 		var arr = this.state.list.slice();
 		//Find the index of the item to be removed
-		var index = this.nestedIndexOf(arr, item.name, item.price)
+		var index = nestedIndexOf(arr, item.name, item.price)
 
 		arr.splice(index, 1);
 		console.log('post splice arr', arr)
@@ -163,6 +149,9 @@ export default class App extends React.Component {
 					disabled={this.state.validInput}
 					handleInputChange={this.handleInputChange}
 					/>
+				<Footer
+					example={"test"}
+				/>
 			</div>
 		)
 	}
