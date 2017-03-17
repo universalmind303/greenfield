@@ -62,8 +62,9 @@ export default class App extends React.Component {
 	}
 	handleClear() {
 	  if(confirm("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")){
-	    this.setState({list: []})
+	    this.setState({budget: 0,list: []})
 	    localStorage.removeItem('list')
+	    localStorage.removeItem('budget')
   	}
 	}
 
@@ -157,6 +158,7 @@ export default class App extends React.Component {
 					handleInputChange={this.handleInputChange}
 					/>
 				<Footer
+					budget={this.state.budget}
 					list={this.state.list}
 					clear={this.handleClear}
 					example={'hello'}

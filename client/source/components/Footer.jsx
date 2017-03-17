@@ -3,10 +3,10 @@ import App from './App.jsx'
 import {save} from './utils.jsx'
 
 
-export default function ({list, clear}) {
+export default function ({budget, list, clear}) {
   return (
     <div className='footer'>
-      <input type="submit" value="Save" onClick={() => save(list)}/>
+      <input type="submit" value="Save" onClick={() => save(budget, list)}/>
       <input type="submit" value="Clear all" onClick={clear}/>
     </div>
   )
