@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header.jsx'
-import {roundToTwo, nestedIndexOf, handleClear} from './utils.jsx'
+import {roundToTwo, nestedIndexOf, save} from './utils.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
@@ -156,6 +156,8 @@ export default class App extends React.Component {
 					handleInputChange={this.handleInputChange}
 					/>
 				<Footer
+					list={this.state.list}
+					save={save}
 					clear={this.handleClear}
 					example={'hello'}
 				/>
