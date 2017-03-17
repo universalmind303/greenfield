@@ -20,7 +20,9 @@ export default class InlineEdit extends React.Component {
   }
 
   blur(e) {
+    console.log('blur')
     this.setState({editing: false})
+    if(this.props.action){ this.props.action(e.target.value) }
   }
 
   editElement() {
@@ -33,12 +35,7 @@ export default class InlineEdit extends React.Component {
     if(e.keyCode === 27) {
       this.setState({editing: false})
     } else if(e.keyCode === 13) {
-      if(this.props.action){
-        this.props.action(e.target.value)
-      } else {
-        cosole.warn('No action set for', this)
-      }
-      this.setState({editing: false})
+      this.blur(e);
     }
   }
 
