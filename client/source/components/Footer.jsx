@@ -7,7 +7,6 @@ export default function ({list, clear}) {
   return (
     <div className='footer'>
       <input type="submit" value="Save" onClick={() => save(list)}/>
-
       <input type="submit" value="Clear all" onClick={clear}/>
     </div>
   )
