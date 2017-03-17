@@ -10,7 +10,6 @@ export default class App extends React.Component {
 	  super(props)
 
 	 	this.state = {
-	 		total: 0,
 	 		budget: 0,
 	 		list: [],
 	 		validInput: "disabled"
@@ -30,13 +29,17 @@ export default class App extends React.Component {
 		return +(Math.round(num + "e+2")  + "e-2")|| 0;
 	}
 
+	calculateTotal() {
+		return this.roundToTwo(
+			this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 )
+		);
+	}
+
 	componentWillMount() {
-		var total = JSON.parse(localStorage.getItem('total')) || 0;
 		var budget = JSON.parse(localStorage.getItem('budget')) || 0;
 		var list = JSON.parse(localStorage.getItem('list')) || [];
 
 		this.setState({
-			total: total,
 			budget: budget,
 			list: list
 		})
@@ -49,7 +52,6 @@ export default class App extends React.Component {
 	handleSubmit(event) {
 		if(event.target.name.value){
 			this.addListItem(event.target.name.value, Number(event.target.price.value));
-			this.updateTotal(Number(event.target.price.value));
     }
 		event.target.name.value = '';
 		event.target.price.value = '';
@@ -71,15 +73,6 @@ export default class App extends React.Component {
 			if(arr[i].name === itemName && arr[i].price === itemPrice){
 				return i;
 			}
-		}
-	}
-
-	updateTotal(num) {
-		if(!isNaN(num)){
-			num = Number(num);
-			var newTotal = this.state.total + num;
-			localStorage.setItem('total', JSON.stringify(newTotal))
-			this.setState({total: newTotal})
 		}
 	}
 
@@ -113,7 +106,6 @@ export default class App extends React.Component {
 				name: item.name,
 				price: itemPrice || 0
 			}
-			this.updateTotal(itemPrice - item.price)
 			arr.splice(index, 1, newItem);
 			localStorage.setItem('list', JSON.stringify(arr))
 			this.setState({list: arr})
@@ -145,8 +137,6 @@ export default class App extends React.Component {
 		//Find the index of the item to be removed
 		var index = this.nestedIndexOf(arr, item.name, item.price)
 
-		this.updateTotal(-(item.price))
-
 		arr.splice(index, 1);
 		console.log('post splice arr', arr)
 
@@ -159,7 +149,7 @@ export default class App extends React.Component {
 			<div className='app'>
 				<Header
 					budget={this.state.budget}
-					total={this.roundToTwo(this.state.total)}
+					total={this.calculateTotal()}
 					updateBudget={this.updateBudget}
 					/>
 				<List
