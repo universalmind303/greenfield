@@ -2,25 +2,25 @@ import React from 'react'
 import App from './App.jsx'
 import InlineEdit from './InlineEdit.jsx'
 
-export default function ListItem (props){
+export default function ListItem ({item, handleRemove, updatePrice, updateName}){
   return (
     <tr className="listItem">
       <td className="action">
-        <button onClick={() => {props.handleRemove(props.item)}}>
+        <button onClick={() => handleRemove(item)}>
           <i className="fa fa-trash" aria-hidden="true"></i>
         </button>
       </td>
       <td className="name">
         <InlineEdit
-          value={props.item.name}
-          action={(value) => {props.updateName(value, props.item)}}
+          value={item.name}
+          action={value => updateName(value, item)}
           type="text"
           />
       </td>
       <td className="price">
         <InlineEdit
-          value={props.item.price}
-          action={(value) => {props.updatePrice(value, props.item)}}
+          value={item.price}
+          action={value => updatePrice(value, item)}
           type="number"
           prefix="$&nbsp;"
           />

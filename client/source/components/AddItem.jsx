@@ -1,15 +1,15 @@
 import React from 'react'
 
-export default function AddItem (props) {
+export default function AddItem ({handleSubmit,handleInputChange,disabled}) {
   return (
-    <form onSubmit={props.handleSubmit} className="addItem clearfix">
+    <form onSubmit={handleSubmit} className="addItem clearfix">
       <input
         className="column half"
         type='text'
         name='name'
         placeholder='Item'
         autoFocus
-        onChange={props.handleInputChange}
+        onChange={handleInputChange}
         />
       <input
         className="column fourth"
@@ -22,7 +22,7 @@ export default function AddItem (props) {
         className="column fourth"
         value='Add'
         type='submit'
-        disabled={props.disabled}
+        disabled={disabled}
         />
     </form>
   )
