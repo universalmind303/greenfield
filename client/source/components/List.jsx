@@ -3,18 +3,18 @@ import App from './App.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import ListItem from './ListItem.jsx'
 
-export default function List (props) {
+export default function List ({handleRemove, updateName,updatePrice, list}) {
   return (
     <table className="list">
       <tbody>
-        {props.list.map(function(item) {
+        {list.map(function(item) {
           return (
             <ListItem
               item={item}
               key={Math.random()}
-              handleRemove={props.handleRemove}
-              updateName={props.updateName}
-              updatePrice={props.updatePrice}
+              handleRemove={handleRemove}
+              updateName={updateName}
+              updatePrice={updatePrice}
               />
           )
         })}

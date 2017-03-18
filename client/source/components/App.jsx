@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header.jsx'
-import {roundToTwo, nestedIndexOf, save} from './utils.jsx'
+import {roundToTwo, nestedIndexOf, save, retrieveListName} from './utils.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
@@ -12,7 +12,8 @@ export default class App extends React.Component {
 	 	this.state = {
 	 		budget: 0,
 	 		list: [],
-	 		validInput: "disabled"
+	 		validInput: "disabled",
+	 		listName: ''
 	 	}
 	 	this.handleClear = this.handleClear.bind(this);
 	 	this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,8 +23,8 @@ export default class App extends React.Component {
 		this.updatePrice = this.updatePrice.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this)
+		this.handleListChange = this.handleListChange.bind(this)
 	}
-
 
 	componentWillMount() {
 		var budget = JSON.parse(localStorage.getItem('budget')) || 0;
@@ -34,15 +35,22 @@ export default class App extends React.Component {
 		})
 	}
 
+	//
+	// event handlers
+	//
+
+	handleListChange({value}) {
+    let {budget,list, listName} = retrieveListName(value)
+    this.setState({
+    	listName: listName,
+    	budget: budget,
+    	list:list
+    })
+  }
+
 	handleInputChange() {
 		this.setState({validInput: ""})
 	}
-
-    calculateTotal() {
-  		return roundToTwo(
-    		this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 )
-  	)
-  }
 
 	handleSubmit(event) {
 		if(event.target.name.value){
@@ -62,12 +70,20 @@ export default class App extends React.Component {
 	}
 	handleClear() {
 	  if(confirm("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")){
-	    this.setState({list: []})
+	    this.setState({budget: 0,list: []})
 	    localStorage.removeItem('list')
+	    localStorage.removeItem('budget')
+  		return true
+  	} else {
+  		return false
   	}
 	}
 
 
+
+  //
+  // functions to update the state. 
+  //
 
 	updateBudget(num) {
 		console.log('updateBudget');
@@ -104,6 +120,15 @@ export default class App extends React.Component {
 			this.setState({list: arr})
 		}
 	}
+  calculateTotal() {
+		return roundToTwo(
+  		this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 )
+		)
+  }
+
+	//
+	// add/remove list items
+	//
 
 	addListItem(name, price) {
 		if(name){
@@ -121,7 +146,8 @@ export default class App extends React.Component {
 				localStorage.setItem('list', JSON.stringify(arr));
 				//Set list equal to the copied array containing new item
 				this.setState({list: arr});
-			}}
+			}
+		}
 	}
 
 	removeListItem(item) {
@@ -136,6 +162,8 @@ export default class App extends React.Component {
 		localStorage.setItem('list', JSON.stringify(arr))
 		this.setState({list: arr})
 	}
+
+
 
 	render() {
 		return (
@@ -157,9 +185,11 @@ export default class App extends React.Component {
 					handleInputChange={this.handleInputChange}
 					/>
 				<Footer
+					handleListChange= {this.handleListChange}
+					budget={this.state.budget}
 					list={this.state.list}
+					listName={this.state.listName}
 					clear={this.handleClear}
-					example={'hello'}
 				/>
 			</div>
 		)
