@@ -1,8 +1,6 @@
 import React from 'react'
 import Header from './Header.jsx'
-import {roundToTwo, nestedIndexOf, save, retrieve} from './utils.jsx'
-import { Router, Route, Link } from 'react-router'
-
+import {roundToTwo, nestedIndexOf, save, retrieveListName} from './utils.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
@@ -36,8 +34,13 @@ export default class App extends React.Component {
 			list: list
 		})
 	}
+
+	//
+	// event handlers
+	//
+
 	handleListChange({value}) {
-    let {budget,list, listName} = retrieve(value)
+    let {budget,list, listName} = retrieveListName(value)
     this.setState({
     	listName: listName,
     	budget: budget,
@@ -48,12 +51,6 @@ export default class App extends React.Component {
 	handleInputChange() {
 		this.setState({validInput: ""})
 	}
-
-    calculateTotal() {
-  		return roundToTwo(
-    		this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 )
-  	)
-  }
 
 	handleSubmit(event) {
 		if(event.target.name.value){
@@ -76,8 +73,17 @@ export default class App extends React.Component {
 	    this.setState({budget: 0,list: []})
 	    localStorage.removeItem('list')
 	    localStorage.removeItem('budget')
+  		return true
+  	} else {
+  		return false
   	}
 	}
+
+
+
+  //
+  // functions to update the state. 
+  //
 
 	updateBudget(num) {
 		console.log('updateBudget');
@@ -114,6 +120,15 @@ export default class App extends React.Component {
 			this.setState({list: arr})
 		}
 	}
+  calculateTotal() {
+		return roundToTwo(
+  		this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 )
+		)
+  }
+
+	//
+	// add/remove list items
+	//
 
 	addListItem(name, price) {
 		if(name){
@@ -147,6 +162,8 @@ export default class App extends React.Component {
 		localStorage.setItem('list', JSON.stringify(arr))
 		this.setState({list: arr})
 	}
+
+
 
 	render() {
 		return (
