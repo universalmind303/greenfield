@@ -1,6 +1,8 @@
 import React from 'react'
 import Header from './Header.jsx'
 import {roundToTwo, nestedIndexOf, save} from './utils.jsx'
+import { Router, Route, Link } from 'react-router'
+
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
@@ -12,7 +14,7 @@ export default class App extends React.Component {
 	 	this.state = {
 	 		budget: 0,
 	 		list: [],
-	 		validInput: "disabled"
+	 		validInput: "disabled",
 	 	}
 	 	this.handleClear = this.handleClear.bind(this);
 	 	this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +25,6 @@ export default class App extends React.Component {
 		this.removeListItem = this.removeListItem.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this)
 	}
-
 
 	componentWillMount() {
 		var budget = JSON.parse(localStorage.getItem('budget')) || 0;
@@ -161,7 +162,6 @@ export default class App extends React.Component {
 					budget={this.state.budget}
 					list={this.state.list}
 					clear={this.handleClear}
-					example={'hello'}
 				/>
 			</div>
 		)

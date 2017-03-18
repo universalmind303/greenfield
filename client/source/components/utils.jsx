@@ -14,5 +14,17 @@ export const nestedIndexOf = (arr, itemName, itemPrice) => {
 }
 
 export const save = (budget, list) => {
-  localStorage.setItem(prompt("list name?"), JSON.stringify({budget: budget, list: list}))
+  let listName = prompt("list name?")
+  var lists = JSON.parse(localStorage.getItem('lists')) || []
+  lists.push({
+    listName: listName,
+    budget: budget,
+    list: list
+  })
+  localStorage.setItem("lists", JSON.stringify(lists))
+}
+
+export const savedLists = () => {
+  var lists = JSON.parse(localStorage.getItem('lists')) || []
+  return lists 
 }
