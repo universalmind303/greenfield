@@ -31,7 +31,6 @@ export default class InlineEdit extends React.Component {
 
   remove(listName) {
     if(this.props.clear()) {
-      console.log('removed')
     localStorage.removeItem(listName)
     let lists = retrieveLists()
     for (let i = 0; i < lists.length; i++) {
