@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header.jsx'
-import {roundToTwo, nestedIndexOf, save} from './utils.jsx'
+import {roundToTwo, nestedIndexOf, save, retrieve} from './utils.jsx'
 import { Router, Route, Link } from 'react-router'
 
 import List from './List.jsx'
@@ -15,6 +15,7 @@ export default class App extends React.Component {
 	 		budget: 0,
 	 		list: [],
 	 		validInput: "disabled",
+	 		listName: ''
 	 	}
 	 	this.handleClear = this.handleClear.bind(this);
 	 	this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,6 +25,7 @@ export default class App extends React.Component {
 		this.updatePrice = this.updatePrice.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this)
+		this.handleListChange = this.handleListChange.bind(this)
 	}
 
 	componentWillMount() {
@@ -34,6 +36,14 @@ export default class App extends React.Component {
 			list: list
 		})
 	}
+	handleListChange({value}) {
+    let {budget,list, listName} = retrieve(value)
+    this.setState({
+    	listName: listName,
+    	budget: budget,
+    	list:list
+    })
+  }
 
 	handleInputChange() {
 		this.setState({validInput: ""})
@@ -68,8 +78,6 @@ export default class App extends React.Component {
 	    localStorage.removeItem('budget')
   	}
 	}
-
-
 
 	updateBudget(num) {
 		console.log('updateBudget');
@@ -123,7 +131,8 @@ export default class App extends React.Component {
 				localStorage.setItem('list', JSON.stringify(arr));
 				//Set list equal to the copied array containing new item
 				this.setState({list: arr});
-			}}
+			}
+		}
 	}
 
 	removeListItem(item) {
@@ -159,8 +168,10 @@ export default class App extends React.Component {
 					handleInputChange={this.handleInputChange}
 					/>
 				<Footer
+					handleListChange= {this.handleListChange}
 					budget={this.state.budget}
 					list={this.state.list}
+					listName={this.state.listName}
 					clear={this.handleClear}
 				/>
 			</div>

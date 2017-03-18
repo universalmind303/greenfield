@@ -1,4 +1,6 @@
 import React from 'react'
+// any function that doesnt directly affect state can go into here.
+
 
 export const roundToTwo = num => Math.round(num * 100)/100;
 
@@ -15,16 +17,32 @@ export const nestedIndexOf = (arr, itemName, itemPrice) => {
 
 export const save = (budget, list) => {
   let listName = prompt("list name?")
-  var lists = JSON.parse(localStorage.getItem('lists')) || []
-  lists.push({
-    listName: listName,
+  var listObj = {
+    listName:listName,
     budget: budget,
     list: list
-  })
-  localStorage.setItem("lists", JSON.stringify(lists))
+  } 
+  var lists = JSON.parse(localStorage.getItem('lists')) || []
+  lists.push(listName)
+  localStorage.setItem('lists', JSON.stringify(lists))
+  localStorage.setItem(listName, JSON.stringify(listObj))
+}
+export const savedLists = () => {
+  return JSON.parse(localStorage.getItem('lists')) || []
+
 }
 
-export const savedLists = () => {
-  var lists = JSON.parse(localStorage.getItem('lists')) || []
-  return lists 
+export const remove = listName => {
+  if(confirm("are you sure?")){
+    localStorage.removeItem(listName)
+    var lists = JSON.parse(localStorage.getItem('lists'))
+    for (var i = 0; i < lists.length; i++) {
+      if(lists[i] === listName) {
+        lists.splice(i, 1)
+      }
+    }
+    localStorage.setItem('lists', JSON.stringify(lists))
+  }
 }
+
+export const retrieve = listName => JSON.parse(localStorage.getItem(listName)) || []

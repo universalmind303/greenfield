@@ -1,36 +1,25 @@
 import React from 'react'
 import App from './App.jsx'
-import {save, savedLists} from './utils.jsx'
+import {save, savedLists, retrieve, remove} from './utils.jsx'
 import Dropdown from 'react-dropdown'
 
 
-
-export default class Footer extends React.Component {
-    constructor(props) {
-    super(props)
-    this.state ={
-      budget: null,
-      list: null
-    }
-  }
-
-
-  render() {
-    const budget = this.props.budget
-    const list = this.props.list
-    const lists = [...new Set(savedLists())]
-    console.log(lists)
-
+// need to convert this to have state for the list
+export default function ({budget, handleListChange, list, clear, listName}) {
+    const saved = savedLists()
     return (
       <div className='footer'>
-      <Dropdown options={
-        lists.map(({listName}) => listName)
-
-      }  value=""placeholder="Your Lists" />
+        <Dropdown 
+        onChange= {handleListChange}
+        options= {saved}
+        placeholder="Your Lists" 
+        />
 
         <input type="submit" value="Save" onClick={() => save(budget, list)}/>
-        <input type="submit" value="Clear all" onClick={() => this.props.clear()}/>
+        <input type="submit" value="Clear all" onClick={() => clear()}/>
+        <input type="submit" value="Delete list" onClick={() => remove(listName)}/>
+
       </div>
     )
-  }
+  
 }
