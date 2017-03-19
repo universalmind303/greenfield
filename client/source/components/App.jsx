@@ -15,13 +15,12 @@ export default class App extends React.Component {
 	 		listName: ''
 	 	}
 	 	this.handleClear = this.handleClear.bind(this);
-		this.handleRemove = this.handleRemove.bind(this);
+		this.handleListChange = this.handleListChange.bind(this);
 		this.updateBudget = this.updateBudget.bind(this);
 		this.updateName = this.updateName.bind(this);
 		this.updatePrice = this.updatePrice.bind(this);
+		this.addListItem = this.addListItem.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
-		this.handleListChange = this.handleListChange.bind(this);
-		this.handleAddItem = this.handleAddItem.bind(this);
 
 	}
 
@@ -44,7 +43,7 @@ export default class App extends React.Component {
 	//
 
 	handleListChange({value}) {
-    let {budget,list, listName} = retrieveListName(value)
+    let {budget, list, listName} = retrieveListName(value)
     this.setState({
     	listName: listName,
     	budget: budget,
@@ -52,15 +51,6 @@ export default class App extends React.Component {
     })
   }
 
-	handleAddItem(event) {
-		this.addListItem();
-	}
-
-	handleRemove(item) {
-		console.log('handleRemove', item);
-		this.removeListItem(item)
-		event.preventDefault();
-	}
 	handleClear() {
 	  if(confirm("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")){
 	    this.setState({budget: 0,list: []})
@@ -115,22 +105,9 @@ export default class App extends React.Component {
 		return this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 ).toFixed(2);
   }
 
-	//
-	// add/remove list items
-	//
-
 	addListItem(name, price) {
-		// Name should be a string
-		name = String(name || '');
-		// Price should either be a two-decimal number or 0
-		price = Number(price) || null;
-		// Copy the current list
 		let list = this.state.list.slice();
-		// Add the new item
-		list.push({
-			name: name,
-			price: price
-		})
+		list.push({name: null, price: null})
 		this.setState({list: list});
 	}
 
@@ -155,9 +132,9 @@ export default class App extends React.Component {
 					list={this.state.list}
 					updateName={this.updateName}
 					updatePrice={this.updatePrice}
-					handleRemove={this.handleRemove}
+					handleRemove={this.removeListItem}
 					/>
-				<AddItem action={this.handleAddItem} />
+				<AddItem action={this.addListItem} />
 				<Footer
 					handleListChange= {this.handleListChange}
 					budget={this.state.budget}

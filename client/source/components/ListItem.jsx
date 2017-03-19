@@ -2,10 +2,10 @@ import React from 'react'
 import App from './App.jsx'
 import InlineEdit from './InlineEdit.jsx'
 
-export default function ListItem ({item, handleRemove, updatePrice, updateName}){
+export default function ListItem ({item, handleRemove, updatePrice, updateName, autofocus}){
   return (
     <tr className="listItem">
-      <td className="action">
+      <td className="delete">
         <button onClick={() => handleRemove(item)}>
           <i className="fa fa-trash" aria-hidden="true"></i>
         </button>

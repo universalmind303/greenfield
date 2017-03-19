@@ -92,14 +92,14 @@ a:active {
   text-align: right;
 }
 
-.listItem .action {
+.listItem .delete {
   border-right: 0.05rem solid #EEE;
   padding: 0;
   text-align: center;
   width: 10%;
 }
 
-.listItem .action button {
+.listItem .delete button {
   background: none;
   border: none;
   color: #ccc;
@@ -111,8 +111,7 @@ a:active {
   width: 100%;
 }
 
-.listItem .action button:hover,
-.listItem .action button:active {
+.listItem .delete button:active {
   background-color: #E74C3C;
   border-color: #E74C3C;
   color: #FFF;
@@ -120,7 +119,7 @@ a:active {
 
 /* Forms */
 
-input {
+input, button, textarea {
   border: none;
   outline: none;
 }
@@ -162,7 +161,6 @@ input {
 }
 
 .addItem:hover {
-  background: #EEE;
   text-decoration: none;
 }
 
@@ -171,26 +169,3 @@ input {
   color: #FFF;
   text-decoration: none;
 }
-
-/*.addItem input {
-  border-right: 0.05rem solid #EEE;
-  padding: 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-.addItem input[type="submit"] {
-  background-color: #3498DB;
-  border: 0.05rem solid #3498DB;
-  color: #FFF;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  outline: none;
-  padding: .75rem 1.25rem;
-}
-
-.addItem input[type="submit"]:active {
-  background-color: #2980b9;
-}*/

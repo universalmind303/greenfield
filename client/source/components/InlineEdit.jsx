@@ -14,21 +14,18 @@ export default class InlineEdit extends React.Component {
     this.editElement = this.editElement.bind(this)
   }
 
-  focus() {
+  focus(e) {
     this.textInput.focus()
     this.textInput.select()
   }
 
   blur(e) {
-    console.log('blur')
     this.setState({editing: false})
     if(this.props.action){ this.props.action(e.target.value) }
   }
 
   editElement() {
-    this.setState({editing: true}, function() {
-      this.focus()
-    })
+    this.setState({editing: true}, this.focus)
   }
 
   keyAction(e) {

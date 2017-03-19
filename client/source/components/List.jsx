@@ -7,7 +7,7 @@ export default function List ({handleRemove, updateName,updatePrice, list}) {
   return (
     <table className="list">
       <tbody>
-        {list.map(function(item) {
+        {list.map((item, index, array) => {
           return (
             <ListItem
               item={item}
