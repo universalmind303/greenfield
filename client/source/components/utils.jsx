@@ -1,8 +1,7 @@
+// Any function that doesnt directly affect state can go into here.
 import React from 'react'
-// any function that doesnt directly affect state can go into here.
 
-
-export const roundToTwo = num => Math.round(num * 100)/100;
+// use `number.toFixed(2)` instead of `roundtoTwo(number)`
 export const retrieveLists = () =>  JSON.parse(localStorage.getItem('lists')) || []
 export const retrieveListName = listName => JSON.parse(localStorage.getItem(listName)) || []
 
