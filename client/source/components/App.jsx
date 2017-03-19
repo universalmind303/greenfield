@@ -12,27 +12,31 @@ export default class App extends React.Component {
 	 	this.state = {
 	 		budget: 0,
 	 		list: [],
-	 		validInput: "disabled",
 	 		listName: ''
 	 	}
 	 	this.handleClear = this.handleClear.bind(this);
-	 	this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleRemove = this.handleRemove.bind(this);
 		this.updateBudget = this.updateBudget.bind(this);
 		this.updateName = this.updateName.bind(this);
 		this.updatePrice = this.updatePrice.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
-		this.handleInputChange = this.handleInputChange.bind(this)
-		this.handleListChange = this.handleListChange.bind(this)
+		this.handleListChange = this.handleListChange.bind(this);
+		this.handleAddItem = this.handleAddItem.bind(this);
+
 	}
 
 	componentWillMount() {
-		var budget = JSON.parse(localStorage.getItem('budget')) || 0;
-		var list = JSON.parse(localStorage.getItem('list')) || [];
+		let budget = JSON.parse(localStorage.getItem('budget')) || 0;
+		let list = JSON.parse(localStorage.getItem('list')) || [];
 		this.setState({
 			budget: budget,
 			list: list
 		})
+	}
+
+	componentDidUpdate() {
+		localStorage.setItem('budget', JSON.stringify(this.state.budget));
+		localStorage.setItem('list', JSON.stringify(this.state.list));
 	}
 
 	//
@@ -48,19 +52,8 @@ export default class App extends React.Component {
     })
   }
 
-	handleInputChange() {
-		this.setState({validInput: ""})
-	}
-
-	handleSubmit(event) {
-		if(event.target.name.value){
-			this.addListItem(event.target.name.value, Number(event.target.price.value));
-    }
-		event.target.name.value = '';
-		event.target.price.value = '';
-		event.target.name.focus();
-  	this.setState({validInput: "disabled"});
-		event.preventDefault();
+	handleAddItem(event) {
+		this.addListItem();
 	}
 
 	handleRemove(item) {
@@ -79,10 +72,8 @@ export default class App extends React.Component {
   	}
 	}
 
-
-
   //
-  // functions to update the state. 
+  // functions to update the state.
   //
 
 	updateBudget(num) {
@@ -121,9 +112,7 @@ export default class App extends React.Component {
 		}
 	}
   calculateTotal() {
-		return roundToTwo(
-  		this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 )
-		)
+		return this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 ).toFixed(2);
   }
 
 	//
@@ -131,23 +120,18 @@ export default class App extends React.Component {
 	//
 
 	addListItem(name, price) {
-		if(name){
-			price = roundToTwo(price)
-			if(!isNaN(price) && typeof name === 'string'){
-				//Make a copy of the list array in state
-				var arr = this.state.list.slice();
-
-				//Push a new item into the copied array
-				arr.push({
-					name: name,
-					price: price
-				})
-
-				localStorage.setItem('list', JSON.stringify(arr));
-				//Set list equal to the copied array containing new item
-				this.setState({list: arr});
-			}
-		}
+		// Name should be a string
+		name = String(name || '');
+		// Price should either be a two-decimal number or 0
+		price = Number(price) || null;
+		// Copy the current list
+		let list = this.state.list.slice();
+		// Add the new item
+		list.push({
+			name: name,
+			price: price
+		})
+		this.setState({list: list});
 	}
 
 	removeListItem(item) {
@@ -155,15 +139,9 @@ export default class App extends React.Component {
 		var arr = this.state.list.slice();
 		//Find the index of the item to be removed
 		var index = nestedIndexOf(arr, item.name, item.price)
-
 		arr.splice(index, 1);
-		console.log('post splice arr', arr)
-
-		localStorage.setItem('list', JSON.stringify(arr))
 		this.setState({list: arr})
 	}
-
-
 
 	render() {
 		return (
@@ -179,11 +157,7 @@ export default class App extends React.Component {
 					updatePrice={this.updatePrice}
 					handleRemove={this.handleRemove}
 					/>
-				<AddItem
-					handleSubmit={this.handleSubmit}
-					disabled={this.state.validInput}
-					handleInputChange={this.handleInputChange}
-					/>
+				<AddItem action={this.handleAddItem} />
 				<Footer
 					handleListChange= {this.handleListChange}
 					budget={this.state.budget}

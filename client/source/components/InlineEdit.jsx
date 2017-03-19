@@ -41,6 +41,7 @@ export default class InlineEdit extends React.Component {
 
   renderElement() {
     if(this.state.editing) {
+      // if the input is being edited
       return(
         <span className="inlineEdit">
           <input
@@ -54,11 +55,18 @@ export default class InlineEdit extends React.Component {
             />
         </span>
       )
-    } else {
+    } else if(this.props.value || this.props.value === 0) {
+      // if value has been set
       return(
         <span onClick={this.editElement} className="inlineEdit">
-          <span className="prefix">{this.props.prefix}</span>
-          {this.props.value}
+          <span className="prefix">{this.props.prefix}</span>{this.props.value}
+        </span>
+      )
+    } else {
+      // use placeholder text
+      return(
+        <span onClick={this.editElement} className="inlineEdit">
+          <span className="placeholder">{this.props.placeholder}</span>
         </span>
       )
     }

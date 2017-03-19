@@ -15,6 +15,7 @@ export default function ListItem ({item, handleRemove, updatePrice, updateName})
           value={item.name}
           action={value => updateName(value, item)}
           type="text"
+          placeholder="Item"
           />
       </td>
       <td className="price">
@@ -23,6 +24,7 @@ export default function ListItem ({item, handleRemove, updatePrice, updateName})
           action={value => updatePrice(value, item)}
           type="number"
           prefix="$&nbsp;"
+          placeholder="Price"
           />
       </td>
     </tr>
