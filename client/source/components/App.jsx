@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header.jsx'
-import {retrieveListName} from './utils.jsx'
+import {retrieveListName, indexOfItem} from './utils.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
@@ -70,15 +70,6 @@ export default class App extends React.Component {
 	 * Mutating State
 	 */
 
-	indexOfItem(list, key) {
-		for (let i = 0; i < list.length; i++) {
-			if(list[i]['key'] === key) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
 	updateBudget(num) {
 		if(!isNaN(num)){
 			this.setState({budget: num || 0})
@@ -90,7 +81,7 @@ export default class App extends React.Component {
 		// copy the list
 		let list = this.state.list.slice();
 		// find the index
-		let index = this.indexOfItem(list, key);
+		let index = indexOfItem(list, key);
 		if(index !== -1) {
 			list[index][property] = value;
 			this.setState({list: list});
@@ -111,7 +102,7 @@ export default class App extends React.Component {
 		// copy the list
 		let list = this.state.list.slice();
 		// find the index
-		let index = this.indexOfItem(list, key);
+		let index = indexOfItem(list, key);
 		list.splice(index, 1);
 		this.setState({list: list});
 	}
