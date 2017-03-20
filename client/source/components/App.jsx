@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header.jsx'
-import {roundToTwo, nestedIndexOf, save, retrieveListName} from './utils.jsx'
+import {retrieveListName} from './utils.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
@@ -13,14 +13,12 @@ export default class App extends React.Component {
 		this.state = {
 			budget: 0,
 			list: [],
-			listName: '',
-			addingItem: false
+			listName: ''
 		}
 		this.handleClear = this.handleClear.bind(this);
 		this.handleListChange = this.handleListChange.bind(this);
 		this.updateBudget = this.updateBudget.bind(this);
-		this.updateName = this.updateName.bind(this);
-		this.updatePrice = this.updatePrice.bind(this);
+		this.updateItem = this.updateItem.bind(this);
 		this.addListItem = this.addListItem.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
 
@@ -72,55 +70,50 @@ export default class App extends React.Component {
 	 * Mutating State
 	 */
 
+	indexOfItem(list, key) {
+		for (let i = 0; i < list.length; i++) {
+			if(list[i]['key'] === key) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	updateBudget(num) {
-		console.log('updateBudget');
 		if(!isNaN(num)){
-			this.setState({budget: num || 0, addingItem: false})
+			this.setState({budget: num || 0})
 			localStorage.setItem('budget', JSON.stringify(num))
 		}
 	}
 
-	updateName(itemName, item) {
-		console.log('updateName')
-		var arr = this.state.list.slice();
-		var index = nestedIndexOf(arr, item.name, item.price)
-		var newItem = {
-			name: itemName,
-			price: item.price
-		}
-		arr.splice(index, 1, newItem);
-		localStorage.setItem('list', JSON.stringify(arr))
-		this.setState({list: arr, addingItem: false})
-	}
-
-	updatePrice(itemPrice, item) {
-		console.log('updatePrice');
-		if(!isNaN(itemPrice)){
-			var arr = this.state.list.slice();
-			var index = nestedIndexOf(arr, item.name, item.price)
-			var newItem = {
-				name: item.name,
-				price: itemPrice || 0
-			}
-			arr.splice(index, 1, newItem);
-			localStorage.setItem('list', JSON.stringify(arr))
-			this.setState({list: arr, addingItem: false})
+	updateItem(key, property, value) {
+		// copy the list
+		let list = this.state.list.slice();
+		// find the index
+		let index = this.indexOfItem(list, key);
+		if(index !== -1) {
+			list[index][property] = value;
+			this.setState({list: list});
 		}
 	}
 
 	addListItem() {
 		let list = this.state.list.slice();
-		list.push({name: null, price: null})
-		this.setState({list: list, addingItem: true});
+		list.push({
+			key: Math.random(),
+			name: null,
+			price: null
+		});
+		this.setState({list: list});
 	}
 
-	removeListItem(item) {
-		//Same process as addListItem
-		var arr = this.state.list.slice();
-		//Find the index of the item to be removed
-		var index = nestedIndexOf(arr, item.name, item.price)
-		arr.splice(index, 1);
-		this.setState({list: arr})
+	removeListItem(key) {
+		// copy the list
+		let list = this.state.list.slice();
+		// find the index
+		let index = this.indexOfItem(list, key);
+		list.splice(index, 1);
+		this.setState({list: list});
 	}
 
 	/*
@@ -141,10 +134,8 @@ export default class App extends React.Component {
 					/>
 				<List
 					list={this.state.list}
-					updateName={this.updateName}
-					updatePrice={this.updatePrice}
-					handleRemove={this.removeListItem}
-					autoFocus={this.state.addingItem}
+					updateItem={this.updateItem}
+					removeItem={this.removeListItem}
 					/>
 				<AddItem action={this.addListItem} />
 				<Footer

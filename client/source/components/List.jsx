@@ -3,19 +3,19 @@ import App from './App.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import ListItem from './ListItem.jsx'
 
-export default function List ({handleRemove, updateName,updatePrice, list, autoFocus}) {
+export default function List ({removeItem, updateItem, list}) {
   return (
     <table className="list">
       <tbody>
         {list.map((item, index, array) => {
+          console.log(item)
           return (
             <ListItem
+              key={item.key || (item.key = Math.random())}
               item={item}
-              key={Math.random()}
-              handleRemove={handleRemove}
-              updateName={updateName}
-              updatePrice={updatePrice}
-              autoFocus={index === array.length-1 && autoFocus}
+              removeItem={removeItem}
+              updateItem={updateItem}
+              autoFocus={index === array.length-1}
               />
           )
         })}

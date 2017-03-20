@@ -15,14 +15,11 @@ export default class InlineEdit extends React.Component {
 
   focus(e) {
     this.setState({focus: true})
-    // see `componentDidUpdate`
+    // see `componentDidMount`
   }
 
   blur(e) {
-    this.setState({
-      focus: false,
-      firstFocus: false
-    })
+    this.setState({focus: false})
     if(this.props.action){
       this.props.action(e.target.value)
     }
@@ -38,8 +35,8 @@ export default class InlineEdit extends React.Component {
 
   componentDidUpdate() {
     if(this.state.focus) {
-      this.textInput.focus()
-      this.textInput.select()
+      this.refs.input.focus()
+      this.refs.input.select()
     }
   }
 
@@ -53,7 +50,7 @@ export default class InlineEdit extends React.Component {
             type={this.props.type || 'text'}
             onBlur={this.blur}
             onKeyDown={this.keyAction}
-            ref={input => this.textInput = input}
+            ref="input"
             defaultValue={this.props.value}
             step=".01"
             autoFocus={this.props.autoFocus}
