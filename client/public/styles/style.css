@@ -1,4 +1,5 @@
 /* General */
+
 * {
   box-sizing: border-box;
 }
@@ -19,6 +20,17 @@ body {
 
 .right {
   text-align: right;
+}
+
+a {
+  color: #3498DB;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover,
+a:active {
+  text-decoration: underline;
 }
 
 /* Header */
@@ -80,14 +92,14 @@ body {
   text-align: right;
 }
 
-.listItem .action {
+.listItem .delete {
   border-right: 0.05rem solid #EEE;
   padding: 0;
   text-align: center;
   width: 10%;
 }
 
-.listItem .action button {
+.listItem .delete button {
   background: none;
   border: none;
   color: #ccc;
@@ -99,8 +111,7 @@ body {
   width: 100%;
 }
 
-.listItem .action button:hover,
-.listItem .action button:active {
+.listItem .delete button:active {
   background-color: #E74C3C;
   border-color: #E74C3C;
   color: #FFF;
@@ -108,7 +119,7 @@ body {
 
 /* Forms */
 
-input {
+input, button, textarea {
   border: none;
   outline: none;
 }
@@ -135,29 +146,26 @@ input {
   width: inherit !important;
 }
 
+.placeholder {
+  color: #AAA;
+}
+
 .addItem {
+  background: none;
   border-bottom: 0.05rem solid #EEE;
-}
-
-.addItem input {
-  border-right: 0.05rem solid #EEE;
+  color: #3498DB;
+  display: block;
   padding: 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  text-align: center;
+  text-decoration: none;
 }
 
-.addItem input[type="submit"] {
-  background-color: #3498DB;
-  border: 0.05rem solid #3498DB;
+.addItem:hover {
+  text-decoration: none;
+}
+
+.addItem:active {
+  background: #3498DB;
   color: #FFF;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  outline: none;
-  padding: .75rem 1.25rem;
-}
-
-.addItem input[type="submit"]:active {
-  background-color: #2980b9;
+  text-decoration: none;
 }

@@ -6,41 +6,43 @@ export default class InlineEdit extends React.Component {
     super(props)
     this.state = {
       value: props.value,
-      editing: false
+      focus: props.autoFocus || false,
     }
     this.focus = this.focus.bind(this)
     this.blur = this.blur.bind(this)
     this.keyAction = this.keyAction.bind(this)
-    this.editElement = this.editElement.bind(this)
   }
 
-  focus() {
-    this.textInput.focus()
-    this.textInput.select()
+  focus(e) {
+    this.setState({focus: true})
+    // see `componentDidMount`
   }
 
   blur(e) {
-    console.log('blur')
-    this.setState({editing: false})
-    if(this.props.action){ this.props.action(e.target.value) }
-  }
-
-  editElement() {
-    this.setState({editing: true}, function() {
-      this.focus()
-    })
+    this.setState({focus: false})
+    if(this.props.action){
+      this.props.action(e.target.value)
+    }
   }
 
   keyAction(e) {
     if(e.keyCode === 27) {
-      this.setState({editing: false})
+      this.setState({focus: false})
     } else if(e.keyCode === 13) {
-      this.blur(e);
+      this.blur(e)
     }
   }
 
-  renderElement() {
-    if(this.state.editing) {
+  componentDidUpdate() {
+    if(this.state.focus) {
+      this.refs.input.focus()
+      this.refs.input.select()
+    }
+  }
+
+  render() {
+    if(this.state.focus) {
+      // if the input is being edited
       return(
         <span className="inlineEdit">
           <input
@@ -48,23 +50,28 @@ export default class InlineEdit extends React.Component {
             type={this.props.type || 'text'}
             onBlur={this.blur}
             onKeyDown={this.keyAction}
-            ref={input => this.textInput = input}
+            ref="input"
             defaultValue={this.props.value}
             step=".01"
+            autoFocus={this.props.autoFocus}
             />
         </span>
       )
-    } else {
+    } else if(this.props.value || this.props.value === 0) {
+      // if value has been set
+        // NOTE: 0 is normally falsy, but it's a valid input, so include it
       return(
-        <span onClick={this.editElement} className="inlineEdit">
-          <span className="prefix">{this.props.prefix}</span>
-          {this.props.value}
+        <span onClick={this.focus} className="inlineEdit">
+          <span className="prefix">{this.props.prefix}</span>{this.props.value}
+        </span>
+      )
+    } else {
+      // otherwise, use placeholder text
+      return(
+        <span onClick={this.focus} className="inlineEdit">
+          <span className="placeholder">{this.props.placeholder}</span>
         </span>
       )
     }
-  }
-
-  render() {
-    return this.renderElement();
   }
 }
