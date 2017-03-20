@@ -4,7 +4,6 @@ import {retrieveListName, indexOfItem} from './utils.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
-import Footer from './Footer.jsx'
 
 export default class App extends React.Component {
 
@@ -13,10 +12,7 @@ export default class App extends React.Component {
 		this.state = {
 			budget: 0,
 			list: [],
-			listName: ''
 		}
-		this.handleClear = this.handleClear.bind(this);
-		this.handleListChange = this.handleListChange.bind(this);
 		this.updateBudget = this.updateBudget.bind(this);
 		this.updateItem = this.updateItem.bind(this);
 		this.addListItem = this.addListItem.bind(this);
@@ -42,29 +38,7 @@ export default class App extends React.Component {
 		localStorage.setItem('list', JSON.stringify(this.state.list));
 	}
 
-	/*
-	 * Custom Events
-	 */
 
-	handleListChange({value}) {
-		let {budget, list, listName} = retrieveListName(value)
-		this.setState({
-			listName: listName,
-			budget: budget,
-			list:list
-		})
-	}
-
-	handleClear() {
-		if(confirm("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")){
-			this.setState({budget: 0,list: []})
-			localStorage.removeItem('list')
-			localStorage.removeItem('budget')
-			return true
-		} else {
-			return false
-		}
-	}
 
 	/*
 	 * Mutating State
@@ -129,13 +103,7 @@ export default class App extends React.Component {
 					removeItem={this.removeListItem}
 					/>
 				<AddItem action={this.addListItem} />
-				<Footer
-					handleListChange= {this.handleListChange}
-					budget={this.state.budget}
-					list={this.state.list}
-					listName={this.state.listName}
-					clear={this.handleClear}
-					/>
+			
 			</div>
 		)
 	}
