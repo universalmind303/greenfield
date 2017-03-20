@@ -7,14 +7,16 @@ import AddItem from './AddItem.jsx'
 import Footer from './Footer.jsx'
 
 export default class App extends React.Component {
+
 	constructor(props){
-	  super(props)
-	 	this.state = {
-	 		budget: 0,
-	 		list: [],
-	 		listName: ''
-	 	}
-	 	this.handleClear = this.handleClear.bind(this);
+		super(props)
+		this.state = {
+			budget: 0,
+			list: [],
+			listName: '',
+			addingItem: false
+		}
+		this.handleClear = this.handleClear.bind(this);
 		this.handleListChange = this.handleListChange.bind(this);
 		this.updateBudget = this.updateBudget.bind(this);
 		this.updateName = this.updateName.bind(this);
@@ -23,6 +25,10 @@ export default class App extends React.Component {
 		this.removeListItem = this.removeListItem.bind(this);
 
 	}
+
+	/*
+	 * Lifecycle Events
+	 */
 
 	componentWillMount() {
 		let budget = JSON.parse(localStorage.getItem('budget')) || 0;
@@ -38,38 +44,38 @@ export default class App extends React.Component {
 		localStorage.setItem('list', JSON.stringify(this.state.list));
 	}
 
-	//
-	// event handlers
-	//
+	/*
+	 * Custom Events
+	 */
 
 	handleListChange({value}) {
-    let {budget, list, listName} = retrieveListName(value)
-    this.setState({
-    	listName: listName,
-    	budget: budget,
-    	list:list
-    })
-  }
-
-	handleClear() {
-	  if(confirm("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")){
-	    this.setState({budget: 0,list: []})
-	    localStorage.removeItem('list')
-	    localStorage.removeItem('budget')
-  		return true
-  	} else {
-  		return false
-  	}
+		let {budget, list, listName} = retrieveListName(value)
+		this.setState({
+			listName: listName,
+			budget: budget,
+			list:list
+		})
 	}
 
-  //
-  // functions to update the state.
-  //
+	handleClear() {
+		if(confirm("ARE YOU SURE YOU WANT TO DELETE YOUR LIST?")){
+			this.setState({budget: 0,list: []})
+			localStorage.removeItem('list')
+			localStorage.removeItem('budget')
+			return true
+		} else {
+			return false
+		}
+	}
+
+	/*
+	 * Mutating State
+	 */
 
 	updateBudget(num) {
 		console.log('updateBudget');
 		if(!isNaN(num)){
-			this.setState({budget: num || 0})
+			this.setState({budget: num || 0, addingItem: false})
 			localStorage.setItem('budget', JSON.stringify(num))
 		}
 	}
@@ -84,7 +90,7 @@ export default class App extends React.Component {
 		}
 		arr.splice(index, 1, newItem);
 		localStorage.setItem('list', JSON.stringify(arr))
-		this.setState({list: arr})
+		this.setState({list: arr, addingItem: false})
 	}
 
 	updatePrice(itemPrice, item) {
@@ -98,17 +104,14 @@ export default class App extends React.Component {
 			}
 			arr.splice(index, 1, newItem);
 			localStorage.setItem('list', JSON.stringify(arr))
-			this.setState({list: arr})
+			this.setState({list: arr, addingItem: false})
 		}
 	}
-  calculateTotal() {
-		return this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 ).toFixed(2);
-  }
 
-	addListItem(name, price) {
+	addListItem() {
 		let list = this.state.list.slice();
 		list.push({name: null, price: null})
-		this.setState({list: list});
+		this.setState({list: list, addingItem: true});
 	}
 
 	removeListItem(item) {
@@ -118,6 +121,14 @@ export default class App extends React.Component {
 		var index = nestedIndexOf(arr, item.name, item.price)
 		arr.splice(index, 1);
 		this.setState({list: arr})
+	}
+
+	/*
+	 * Rendering the Component
+	 */
+
+	calculateTotal() {
+		return this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 ).toFixed(2);
 	}
 
 	render() {
@@ -133,6 +144,7 @@ export default class App extends React.Component {
 					updateName={this.updateName}
 					updatePrice={this.updatePrice}
 					handleRemove={this.removeListItem}
+					autoFocus={this.state.addingItem}
 					/>
 				<AddItem action={this.addListItem} />
 				<Footer
@@ -141,7 +153,7 @@ export default class App extends React.Component {
 					list={this.state.list}
 					listName={this.state.listName}
 					clear={this.handleClear}
-				/>
+					/>
 			</div>
 		)
 	}

@@ -3,7 +3,7 @@ import App from './App.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import ListItem from './ListItem.jsx'
 
-export default function List ({handleRemove, updateName,updatePrice, list}) {
+export default function List ({handleRemove, updateName,updatePrice, list, autoFocus}) {
   return (
     <table className="list">
       <tbody>
@@ -15,6 +15,7 @@ export default function List ({handleRemove, updateName,updatePrice, list}) {
               handleRemove={handleRemove}
               updateName={updateName}
               updatePrice={updatePrice}
+              autoFocus={index === array.length-1 && autoFocus}
               />
           )
         })}
