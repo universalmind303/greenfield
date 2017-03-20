@@ -2,7 +2,7 @@ import React from 'react'
 import App from './App.jsx'
 import InlineEdit from './InlineEdit.jsx'
 
-export default function ListItem ({item, removeItem, updateItem, autoFocus}){
+export default function ListItem ({item, removeItem, updateItem, autoFocus,focused}){
   return (
     <tr className="listItem">
       <td className="delete">

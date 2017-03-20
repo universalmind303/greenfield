@@ -1,9 +1,11 @@
 import React from 'react'
 import Header from './Header.jsx'
-import {retrieveListName, indexOfItem} from './utils.jsx'
+import {indexOfItem} from './utils.jsx'
 import List from './List.jsx'
 import InlineEdit from './InlineEdit.jsx'
 import AddItem from './AddItem.jsx'
+import Dragula from 'react-dragula';
+
 
 export default class App extends React.Component {
 
@@ -12,11 +14,13 @@ export default class App extends React.Component {
 		this.state = {
 			budget: 0,
 			list: [],
+			focused: false
 		}
 		this.updateBudget = this.updateBudget.bind(this);
 		this.updateItem = this.updateItem.bind(this);
 		this.addListItem = this.addListItem.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
+		this.dragulaDecorator = this.dragulaDecorator.bind(this)
 
 	}
 
@@ -37,6 +41,32 @@ export default class App extends React.Component {
 		localStorage.setItem('budget', JSON.stringify(this.state.budget));
 		localStorage.setItem('list', JSON.stringify(this.state.list));
 	}
+	focused() {
+
+	}
+	dragulaDecorator (componentBackingInstance) {
+    HTMLCollection.prototype.forEach = Array.prototype.forEach;
+    if (componentBackingInstance) {
+    	var context = this
+      Dragula([componentBackingInstance])
+    	.on('drag', () => context.setState({focused: false}))
+    	.on('drop', function() {
+        let result = []
+        this.containers[0].children.forEach(htmlListItem => {
+
+          let [name, price] = htmlListItem.innerText.split(/\$/)
+            .map(value => value.replace(/[^a-zA-Z0-9]/g, ""))
+
+          result.push({
+            key: null,
+            name: name,
+            price: price
+          });
+        })
+        context.setState({list: result})
+      })
+    }
+  }
 
 
 
@@ -69,7 +99,7 @@ export default class App extends React.Component {
 			name: null,
 			price: null
 		});
-		this.setState({list: list});
+		this.setState({list: list, focused: true});
 	}
 
 	removeListItem(key) {
@@ -80,6 +110,7 @@ export default class App extends React.Component {
 		list.splice(index, 1);
 		this.setState({list: list});
 	}
+
 
 	/*
 	 * Rendering the Component
@@ -98,11 +129,15 @@ export default class App extends React.Component {
 					updateBudget={this.updateBudget}
 					/>
 				<List
+					focused={this.state.focused}
+					dragulaDecorator={this.dragulaDecorator}
+					dragDrop={this.dragDrop}
 					list={this.state.list}
 					updateItem={this.updateItem}
 					removeItem={this.removeListItem}
 					/>
-				<AddItem action={this.addListItem} />
+				<AddItem 
+				action={this.addListItem} />
 			
 			</div>
 		)
