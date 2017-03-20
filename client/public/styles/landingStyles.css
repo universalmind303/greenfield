@@ -1,0 +1,126 @@
+body {
+  width: 1000px;
+  background: white;
+  line-height: 1.5rem;
+  /*  BEGIN: BETTER HELVETICA by Chris Coyier https://css-tricks.com/snippets/css/better-helvetica/ */
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  margin: 10px auto;
+}
+
+h1 {
+  font-size: 39px;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #3498DB;
+}
+
+h2 {
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-left: 10px;
+}
+
+.info {
+  text-align: justify;
+  margin-left: 10px;
+}
+
+button {
+  font-size: 30px;
+  display: inline;
+  color: white;
+  background-color: #ff4000;
+  border-radius: 5px;
+  height: 50px;
+  letter-spacing: 1px;
+  margin-left: 10px;
+}
+button:hover {
+  background-color: red;
+}
+
+a {
+  text-decoration: none;
+}
+
+.co-name {
+  line-height: 2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 30px;
+}
+
+.social-icons {
+  width: 175px;
+  float: right;
+}
+
+.column {
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.column.full {
+  width: 1000px;
+}
+
+.column.half {
+  width: 490px;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+.secondary-headline {
+  float: right;
+}
+
+.list {
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 100px;
+}
+
+.testimonial img {
+  float: left;
+  height: 250px;
+  margin-right: 5px;
+}
+
+.testimonial-title {
+  text-transform: uppercase;
+  font-size: 25px;
+  margin: 10px 0 5px 245px;
+}
+
+.testimonial-text {
+  text-align: justify;
+  padding: 0 5px 0 245px;
+}
+
+.infoCol img {
+  float: left;
+  height: 250px;
+  margin-right: 5px;
+}
+
+.more-info {
+  text-transform: uppercase;
+  font-size: 25px;
+  margin: 10px 0 0 220px;
+}
+
+.more-info-list {
+  padding: 0 5px 0 240px;
+}
+
+.main img {
+  margin-bottom: 20px;
+  width: 500px;
+  float: left;
+}
