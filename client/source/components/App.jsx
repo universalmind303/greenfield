@@ -55,7 +55,7 @@ export default class App extends React.Component {
         this.containers[0].children.forEach(htmlListItem => {
 
           let [name, price] = htmlListItem.innerText.split(/\$/)
-            .map(value => value.replace(/[^a-zA-Z0-9]/g, ""))
+            .map(value => value.replace(/[^a-zA-Z0-9.]/g, ""))
 
           result.push({
             key: null,
