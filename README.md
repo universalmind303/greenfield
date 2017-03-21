@@ -18,7 +18,7 @@ Stay within budget while shopping.
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Run Locally](#run-locally)
-    1. [Tasks](#tasks)
+    1. [Deploy](#deploy)
 1. [Contributing](#contributing)
 
 ## Usage
@@ -54,12 +54,12 @@ but the real server runs
 
 Follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-automatic-deployment-with-git-with-a-vps) to configure your deployment server. When you're ready to deplay:
 
-#### Run locally:
+#### On your computer:
 
 1. `git pull --rebase upstream master`
 2. `git push live master`
 
-#### Run on your server:
+#### On the server:
 
 1. `npm install`
 2. `webpack -p`
