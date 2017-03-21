@@ -63,7 +63,8 @@ Follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-set-
 
 1. `npm install`
 2. `webpack -p`
-3. `npm start`
+3. `pm2 start server/server.js`
+    See [PM2's documentation](http://pm2.keymetrics.io/docs/usage/cluster-mode/) for additional commands
 
 #### If you're having trouble:
 
