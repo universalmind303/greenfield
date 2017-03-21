@@ -69,7 +69,7 @@ Follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-set-
 #### If you're having trouble:
 
 1. **Location:** Before running `npm install` on the server, make sure that you go to the working directory. e.g. if the server file lives at `/var/grocerybag/server/server.js`, go to `/var/grocerybag/` in the terminal.
-2. **Process Manager:** Make sure that PM2 is install globally. If not, run:
+2. **Process Manager:** Make sure that PM2 is installed globally. If not, run:
 
     ```sh
     npm install pm2 -g
