@@ -52,7 +52,7 @@ NOTE: `npm run dev` will serve files at `http://localhost:8080/client/public/`, 
 
 ### Deploy
 
-Follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-automatic-deployment-with-git-with-a-vps) to configure your deployment server. When you're ready to deplay:
+Follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-automatic-deployment-with-git-with-a-vps) to configure your deployment server. When you're ready to deploy:
 
 #### On your computer:
 
