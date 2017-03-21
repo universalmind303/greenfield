@@ -6,10 +6,10 @@ export default class InlineEdit extends React.Component {
     super(props)
     this.state = {
       value: props.value,
-      focus: props.autoFocus || false,
+      focus: props.autoFocus || false
     };
-    this.focus = this.focus.bind(this);
     this.blur = this.blur.bind(this);
+    this.focus = this.focus.bind(this);
     this.keyAction = this.keyAction.bind(this);
   }
 
@@ -18,10 +18,10 @@ export default class InlineEdit extends React.Component {
     // see `componentDidMount`
   }
 
-  blur() {
+  blur(e) {
     this.setState({focus: false});
     if(this.props.action){
-      this.props.action(e.target.value)
+      this.props.action(e.target.value);
     }
   }
 

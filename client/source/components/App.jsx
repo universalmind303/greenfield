@@ -92,22 +92,23 @@ export default class App extends React.Component {
 	dragulaDecorator (component) {
     	var context = this
       Dragula([component])
-    	.on('drag', () => context.setState({focused: false}))
-    	.on('drop', function() {
-        let list = [];
-        Array.prototype.forEach.call(this.containers[0].children, htmlListItem => {
-          let [name, price] = htmlListItem.innerText.split(/\$/)
-            .map(value => value.replace(/[^a-zA-Z0-9.]/g, ""));
+	    	.on('drag', () => context.setState({focused: false}))
 
-          list.push({
-            key: null,
-            name: name,
-            price: price
-          });
+	    	//this needs to be a function instead of => to retain proper this context.
+	    	.on('drop', function() {
+	        let list = [];
+	        Array.prototype.forEach.call(this.containers[0].children, htmlListItem => {
+	          let [name, price] = htmlListItem.innerText.split(/\$/)
+	            .map(value => value.replace(/[^a-zA-Z0-9.]/g, ""));
 
-        });
-        context.setState({list: list});
-      });
+	          list.push({
+	            key: null,
+	            name: name,
+	            price: price
+	          });
+	        });
+	        context.setState({list: list});
+      	});
   }
 
 
@@ -116,7 +117,7 @@ export default class App extends React.Component {
 	 */
 
 	calculateTotal() {
-		return this.state.list.reduce( (sum, item) => sum + Number(item.price), 0 ).toFixed(2);
+		return this.state.list.reduce( (sum, {price}) => sum + Number(price), 0 ).toFixed(2);
 	}
 
 	render() {
