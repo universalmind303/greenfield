@@ -13,12 +13,12 @@ export default class InlineEdit extends React.Component {
     this.keyAction = this.keyAction.bind(this);
   }
 
-  focus(e) {
+  focus() {
     this.setState({focus: true});
     // see `componentDidMount`
   }
 
-  blur(e) {
+  blur() {
     this.setState({focus: false});
     if(this.props.action){
       this.props.action(e.target.value)

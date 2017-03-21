@@ -16,9 +16,9 @@ export default class App extends React.Component {
 			list: [],
 			focused: false
 		};
-		this.updateBudget = this.updateBudget.bind(this);
 		this.updateItem = this.updateItem.bind(this);
 		this.addListItem = this.addListItem.bind(this);
+		this.updateBudget = this.updateBudget.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
 		this.dragulaDecorator = this.dragulaDecorator.bind(this);
 
@@ -73,7 +73,10 @@ export default class App extends React.Component {
 			name: null,
 			price: null
 		});
-		this.setState({list: list, focused: true});
+		this.setState({
+			list: list, 
+			focused: true
+		});
 	}
 
 	removeListItem(key) {
