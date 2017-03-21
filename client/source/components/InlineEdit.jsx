@@ -1,42 +1,42 @@
-import React from 'react'
-import App from './App.jsx'
+import React from 'react';
+import App from './App.jsx';
 
 export default class InlineEdit extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       value: props.value,
-      focus: props.autoFocus || false,
-    }
-    this.focus = this.focus.bind(this)
-    this.blur = this.blur.bind(this)
-    this.keyAction = this.keyAction.bind(this)
+      focus: props.autoFocus || false
+    };
+    this.blur = this.blur.bind(this);
+    this.focus = this.focus.bind(this);
+    this.keyAction = this.keyAction.bind(this);
   }
 
-  focus(e) {
-    this.setState({focus: true})
+  focus() {
+    this.setState({focus: true});
     // see `componentDidMount`
   }
 
   blur(e) {
-    this.setState({focus: false})
+    this.setState({focus: false});
     if(this.props.action){
-      this.props.action(e.target.value)
+      this.props.action(e.target.value);
     }
   }
 
   keyAction(e) {
     if(e.keyCode === 27) {
-      this.setState({focus: false})
+      this.setState({focus: false});
     } else if(e.keyCode === 13) {
-      this.blur(e)
+      this.blur(e);
     }
   }
 
   componentDidUpdate() {
     if(this.state.focus) {
-      this.refs.input.focus()
-      this.refs.input.select()
+      this.refs.input.focus();
+      this.refs.input.select();
     }
   }
 
