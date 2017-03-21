@@ -46,7 +46,8 @@ npm install
 ```sh
 npm run dev
 ```
-NOTE: live-server will serve files at `http://localhost:8080/client/public/`, but the real server serves them at `http://localhost:8080/`.
+
+NOTE: `npm run dev` will serve files at `http://localhost:8080/client/public/`, but `npm start` serves them at `http://localhost:8080/`.
 
 
 ### Deploy
