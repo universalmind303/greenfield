@@ -1,9 +1,9 @@
-import React from 'react'
-import Header from './Header.jsx'
-import {indexOfItem} from './utils.jsx'
-import List from './List.jsx'
-import InlineEdit from './InlineEdit.jsx'
-import AddItem from './AddItem.jsx'
+import React from 'react';
+import Header from './Header.jsx';
+import {indexOfItem} from './utils.jsx';
+import List from './List.jsx';
+import InlineEdit from './InlineEdit.jsx';
+import AddItem from './AddItem.jsx';
 import Dragula from 'react-dragula';
 
 
@@ -15,12 +15,12 @@ export default class App extends React.Component {
 			budget: 0,
 			list: [],
 			focused: false
-		}
+		};
 		this.updateBudget = this.updateBudget.bind(this);
 		this.updateItem = this.updateItem.bind(this);
 		this.addListItem = this.addListItem.bind(this);
 		this.removeListItem = this.removeListItem.bind(this);
-		this.dragulaDecorator = this.dragulaDecorator.bind(this)
+		this.dragulaDecorator = this.dragulaDecorator.bind(this);
 
 	}
 
@@ -34,39 +34,13 @@ export default class App extends React.Component {
 		this.setState({
 			budget: budget,
 			list: list
-		})
+		});
 	}
 
 	componentDidUpdate() {
 		localStorage.setItem('budget', JSON.stringify(this.state.budget));
 		localStorage.setItem('list', JSON.stringify(this.state.list));
 	}
-	focused() {
-
-	}
-	dragulaDecorator (componentBackingInstance) {
-    HTMLCollection.prototype.forEach = Array.prototype.forEach;
-    if (componentBackingInstance) {
-    	var context = this
-      Dragula([componentBackingInstance])
-    	.on('drag', () => context.setState({focused: false}))
-    	.on('drop', function() {
-        let result = []
-        this.containers[0].children.forEach(htmlListItem => {
-
-          let [name, price] = htmlListItem.innerText.split(/\$/)
-            .map(value => value.replace(/[^a-zA-Z0-9.]/g, ""))
-
-          result.push({
-            key: null,
-            name: name,
-            price: price
-          });
-        })
-        context.setState({list: result})
-      })
-    }
-  }
 
 
 
@@ -76,8 +50,8 @@ export default class App extends React.Component {
 
 	updateBudget(num) {
 		if(!isNaN(num)){
-			this.setState({budget: num || 0})
-			localStorage.setItem('budget', JSON.stringify(num))
+			this.setState({budget: num || 0});
+			localStorage.setItem('budget', JSON.stringify(num));
 		}
 	}
 
@@ -110,6 +84,28 @@ export default class App extends React.Component {
 		list.splice(index, 1);
 		this.setState({list: list});
 	}
+
+	// function for drag and drop
+	dragulaDecorator (component) {
+    	var context = this
+      Dragula([component])
+    	.on('drag', () => context.setState({focused: false}))
+    	.on('drop', function() {
+        let list = [];
+        Array.prototype.forEach.call(this.containers[0].children, htmlListItem => {
+          let [name, price] = htmlListItem.innerText.split(/\$/)
+            .map(value => value.replace(/[^a-zA-Z0-9.]/g, ""));
+
+          list.push({
+            key: null,
+            name: name,
+            price: price
+          });
+
+        });
+        context.setState({list: list});
+      });
+  }
 
 
 	/*

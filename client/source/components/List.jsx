@@ -1,7 +1,7 @@
-import React from 'react'
-import App from './App.jsx'
-import InlineEdit from './InlineEdit.jsx'
-import ListItem from './ListItem.jsx'
+import React from 'react';
+import App from './App.jsx';
+import InlineEdit from './InlineEdit.jsx';
+import ListItem from './ListItem.jsx';
 
 export default function List ({removeItem, updateItem, list, dragulaDecorator, focused}) {
 
