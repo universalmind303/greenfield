@@ -2,18 +2,18 @@ import React from 'react';
 import App from './App.jsx';
 import InlineEdit from './InlineEdit.jsx';
 
-export default function ListItem ({{key,price,name}, removeItem, updateItem, autoFocus,focused}){
+export default function ListItem ({item, removeItem, updateItem, autoFocus,focused}){
   return (
     <tr className="listItem">
       <td className="delete">
-        <button onClick={() => removeItem(key)}>
+        <button onClick={() => removeItem(item.key)}>
           <i className="fa fa-trash" aria-hidden="true"></i>
         </button>
       </td>
       <td className="name">
         <InlineEdit
-          value={name}
-          action={value => updateItem(key, "name", value)}
+          value={item.name}
+          action={value => updateItem(item.key, "name", value)}
           type="text"
           placeholder="Item"
           autoFocus={autoFocus}
@@ -21,8 +21,8 @@ export default function ListItem ({{key,price,name}, removeItem, updateItem, aut
       </td>
       <td className="price">
         <InlineEdit
-          value={price}
-          action={value => updateItem(key, "price", value)}
+          value={item.price}
+          action={value => updateItem(item.key, "price", value)}
           type="number"
           prefix="$&nbsp;"
           placeholder="$ 0"
